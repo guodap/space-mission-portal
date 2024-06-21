@@ -5,6 +5,7 @@ export const getData = async (url) => {
     const { data } = await axios.get(url);
     return data;
   } catch (e) {
+    console.log(`An error occurred while getting data from ${url}: ${e}`);
     throw e;
   }
 };
