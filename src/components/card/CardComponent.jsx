@@ -9,6 +9,7 @@ import CardContent from "@mui/joy/CardContent";
 //NOTE - joy is beta release. Find alternative?
 
 const CardComponent = ({
+  id,
   name,
   description,
   date,
@@ -19,7 +20,7 @@ const CardComponent = ({
 }) => {
   return (
     // need better key?
-    <Card key={name} orientation="horizontal" x={{ maxWidth: 345 }}>
+    <Card key={id} orientation="horizontal" x={{ maxWidth: 345 }}>
       {/* add default image? */}
       <CardMedia component="img" alt={name} sx={{ width: 151 }} image={image} />
       <CardContent>

@@ -6,12 +6,13 @@ const CardGallery = ({ data }) => {
     <>
       {data.map((launch) => (
         <CardComponent
+          id={launch.id}
           name={launch.name}
           description={launch.details}
           date={timestampToDate(launch.date_local)}
           image={launch.links.patch.small}
           link={launch.links.webcast}
-          linkName={"Youtube"} //Display in a more visually appealing way?
+          linkName={"Youtube"} //Display in a more visually appealing way? //get link to work
           status={launch.success ? "Success" : "Failure"}
         />
       ))}

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { getData } from "../utils/getData";
+import { filterDataByName } from "../utils/filterData";
 
 export const useData = (url) => {
   const [data, setData] = useState(null);
+  const [searchData, setSearchData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -22,5 +24,9 @@ export const useData = (url) => {
     handleData();
   }, []);
 
-  return { data, loading, error };
+  const searchByName = (input) => {
+    setSearchData(input ? filterDataByName(data, input) : null);
+  };
+
+  return { data: searchData || data, loading, error, searchByName };
 };
