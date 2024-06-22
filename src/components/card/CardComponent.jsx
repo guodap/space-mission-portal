@@ -20,6 +20,7 @@ const CardComponent = ({
   return (
     // need better key?
     <Card key={name} orientation="horizontal" x={{ maxWidth: 345 }}>
+      {/* add default image? */}
       <CardMedia component="img" alt={name} sx={{ width: 151 }} image={image} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

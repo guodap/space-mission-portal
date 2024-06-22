@@ -1,14 +1,7 @@
 import { Table } from "./Table";
-import { Error } from "../Error";
-import { TableSkeleton } from "../Skeleton";
-
 import { timestampToDate } from "../../utils/formatDate";
-import { useData } from "../../hooks/useData";
 
-const LaunchRecordsTable = () => {
-  const { data, loading, error } = useData(
-    "https://api.spacexdata.com/v4/launches"
-  );
+const LaunchRecordsTable = ({ data }) => {
   const columns = [
     {
       name: "Launch Name",
@@ -52,11 +45,6 @@ const LaunchRecordsTable = () => {
         row.links.webcast ? <a href={row.links.webcast}>Youtube Link</a> : null, //Display in a more visually appealing way?
     },
   ];
-
-  //API returned no results state?
-  //Calling hook in both Card and Table, can put in one page component?
-  if (loading) return <TableSkeleton />;
-  if (error) return <Error />;
 
   return <Table data={data} columns={columns} />;
 };
