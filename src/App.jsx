@@ -1,14 +1,11 @@
-import LaunchRecordsTable from "./components/table/LaunchRecordsTable";
-import LaunchRecordCardGallery from "./components/card/LaunchRecordsCardGallery";
+import LaunchDataPage from "./components/LaunchDataPage";
 
 import "./App.css";
 
 const App = () => {
   return (
     <>
-      <h1>SpaceX Launches</h1>
-      {<LaunchRecordCardGallery />}
-      {/* <LaunchRecordsTable /> */}
+      <LaunchDataPage />
     </>
   ); //add error boundary to debug better
 };

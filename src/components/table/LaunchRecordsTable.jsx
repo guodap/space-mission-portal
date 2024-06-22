@@ -1,5 +1,3 @@
-import CancelIcon from "@mui/icons-material/Cancel";
-
 import { Table } from "./Table";
 import { Error } from "../Error";
 import { TableSkeleton } from "../Skeleton";
@@ -51,7 +49,7 @@ const LaunchRecordsTable = () => {
       name: "Link",
       selector: (row) => row.links.webcast,
       cell: (row) =>
-        row.links.webcast ? <a href={row.links.webcast}>Youtube Link</a> : null,
+        row.links.webcast ? <a href={row.links.webcast}>Youtube Link</a> : null, //Display in a more visually appealing way?
     },
   ];
 
