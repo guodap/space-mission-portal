@@ -15,7 +15,7 @@ export const usePagination = (data, itemsPerPage = 10) => {
   const canGetPrevious = currentPage > 1;
   const canGetNext = currentPage < totalPages;
 
-  //RESUSE DATA?
+  //REUSE DATA?
   //   const handlePageChange = (oldPage, direction) => {
   //     setCurrentPage(direction === "next" ? oldPage + 1 : oldPage - 1);
   //   };
@@ -30,7 +30,6 @@ export const usePagination = (data, itemsPerPage = 10) => {
 
   return {
     currentPage,
-    setCurrentPage,
     paginatedData,
     totalPages,
     canGetNext,

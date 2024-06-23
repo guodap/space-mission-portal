@@ -32,6 +32,7 @@ const CardComponent = ({
       orientation="horizontal"
       sx={{ maxWidth: "100%", width: "100%" }}
     >
+      {/* add default image? */}
       <CardMedia
         component="img"
         alt={name}

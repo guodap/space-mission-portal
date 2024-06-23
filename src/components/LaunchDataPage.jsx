@@ -29,7 +29,7 @@ const LaunchDataPage = () => {
 
   const sortedData = sortByTimestamp(data, sortOrder);
 
-  const perPage = 5;
+  const perPage = 10;
   const {
     currentPage,
     paginatedData,
@@ -57,11 +57,11 @@ const LaunchDataPage = () => {
         <div>
           <MaterialButton variant="text" onClick={toggleSortOrder}>
             {sortOrder === "ascending" ? (
-              <KeyboardArrowUpIcon />
-            ) : (
               <KeyboardArrowDownIcon />
+            ) : (
+              <KeyboardArrowUpIcon />
             )}
-            Sort date
+            Sort by date
           </MaterialButton>
         </div>
       )}
