@@ -1,4 +1,4 @@
-import * as React from "react";
+import PropTypes from "prop-types";
 import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
@@ -47,3 +47,14 @@ const CardComponent = ({
 };
 
 export default CardComponent;
+
+CardComponent.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  linkName: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+};

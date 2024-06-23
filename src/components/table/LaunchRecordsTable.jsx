@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Table } from "./Table";
 import { timestampToDate } from "../../utils/formatDate";
 
@@ -50,3 +51,7 @@ const LaunchRecordsTable = ({ data }) => {
 };
 
 export default LaunchRecordsTable;
+
+LaunchRecordsTable.propTypes = {
+  data: PropTypes.any.isRequired,
+};

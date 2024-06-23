@@ -34,6 +34,7 @@ const LaunchDataPage = () => {
   const {
     currentPage,
     paginatedData,
+    setPaginatedData,
     totalPages,
     canGetNext,
     canGetPrevious,

@@ -1,4 +1,4 @@
-import TextField from "@mui/material/TextField";
+import PropTypes from "prop-types";
 
 export const SearchBox = ({ placeholder, ariaLabel, handlerFunction }) => {
   const handleChange = (event) => {
@@ -14,4 +14,10 @@ export const SearchBox = ({ placeholder, ariaLabel, handlerFunction }) => {
       className="search-input"
     />
   );
+};
+
+SearchBox.propTypes = {
+  placeholder: PropTypes.string.isRequired,
+  ariaLabel: PropTypes.string.isRequired,
+  handlerFunction: PropTypes.any.isRequired,
 };
