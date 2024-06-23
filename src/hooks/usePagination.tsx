@@ -8,7 +8,7 @@ export const usePagination = (data, itemsPerPage = 10) => {
     setPaginatedData(
       data?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
     ); //have loading and error states? Needed?
-  }, [data, currentPage]);
+  }, [data, currentPage, paginatedData]);
 
   const totalPages = Math.ceil(data?.length / itemsPerPage);
 
@@ -31,6 +31,7 @@ export const usePagination = (data, itemsPerPage = 10) => {
   return {
     currentPage,
     paginatedData,
+    setPaginatedData,
     totalPages,
     canGetNext,
     canGetPrevious,
