@@ -58,9 +58,9 @@ const LaunchDataPage = () => {
         <div>
           <MaterialButton variant="text" onClick={toggleSortOrder}>
             {sortOrder === "ascending" ? (
-              <KeyboardArrowDownIcon />
-            ) : (
               <KeyboardArrowUpIcon />
+            ) : (
+              <KeyboardArrowDownIcon />
             )}
             Sort by date
           </MaterialButton>
