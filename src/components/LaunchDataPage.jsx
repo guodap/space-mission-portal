@@ -1,3 +1,8 @@
+import { useState } from "react";
+import { Button as MaterialButton } from "@mui/material";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
 import { Error } from "./Error";
 import { TableSkeleton } from "./Skeleton";
 import CardGallery from "./card/CardGallery";
@@ -6,15 +11,25 @@ import { SearchBox } from "./SearchBox";
 
 import { useData } from "../hooks/useData";
 import { usePagination } from "../hooks/usePagination";
+import { sortByTimestamp } from "../utils/sortData";
 
 import "./LaunchDataPage.css";
 
-export const LaunchDataPage = () => {
+const LaunchDataPage = () => {
   const { data, loading, error, searchByName } = useData(
     "https://api.spacexdata.com/v4/launches"
   );
 
-  const perPage = 8;
+  const [sortOrder, setSortOrder] = useState("ascending");
+
+  const toggleSortOrder = () => {
+    const newSortOrder = sortOrder === "ascending" ? "descending" : "ascending";
+    setSortOrder(newSortOrder);
+  };
+
+  const sortedData = sortByTimestamp(data, sortOrder);
+
+  const perPage = 5;
   const {
     currentPage,
     paginatedData,
@@ -23,13 +38,13 @@ export const LaunchDataPage = () => {
     canGetPrevious,
     getNext,
     getPrevious,
-  } = usePagination(data, perPage);
+  } = usePagination(sortedData, perPage);
 
-  //API returned no results state?
-  //Calling hook for both Card and Table, can put in one page component?
   if (loading) return <TableSkeleton />;
   if (error) return <Error />;
-  if (!data || !paginatedData) return <div>No data</div>;
+
+  const foundData = paginatedData && paginatedData.length;
+
   return (
     <>
       <h1>SpaceX Launches</h1>
@@ -38,9 +53,25 @@ export const LaunchDataPage = () => {
         ariaLabel="Search for SpaceX Launches by name"
         handlerFunction={searchByName}
       />
-      <CardGallery data={paginatedData} />
+      {foundData && (
+        <div>
+          <MaterialButton variant="text" onClick={toggleSortOrder}>
+            {sortOrder === "ascending" ? (
+              <KeyboardArrowUpIcon />
+            ) : (
+              <KeyboardArrowDownIcon />
+            )}
+            Sort date
+          </MaterialButton>
+        </div>
+      )}
       {/* Note: Should restrict card gallery size as buttons bounce around page onClick and scroll is necessary ATM*/}
       {/* BUG: After filtration, restore currentPage to 1 */}
+      {foundData ? (
+        <CardGallery data={paginatedData} />
+      ) : (
+        <div>No launch data found</div>
+      )}
       <Button
         disabled={!canGetPrevious}
         onClick={getPrevious}
