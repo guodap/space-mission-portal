@@ -25,6 +25,7 @@ const LaunchDataPage = () => {
   const toggleSortOrder = () => {
     const newSortOrder = sortOrder === "ascending" ? "descending" : "ascending";
     setSortOrder(newSortOrder);
+    setPaginatedData(null);
   };
 
   const sortedData = sortByTimestamp(data, sortOrder);
@@ -61,7 +62,7 @@ const LaunchDataPage = () => {
             ) : (
               <KeyboardArrowDownIcon />
             )}
-            Sort date
+            Sort by date
           </MaterialButton>
         </div>
       )}
