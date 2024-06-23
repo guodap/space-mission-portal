@@ -14,7 +14,7 @@ export const LaunchDataPage = () => {
     "https://api.spacexdata.com/v4/launches"
   );
 
-  const perPage = 10;
+  const perPage = 8;
   const {
     currentPage,
     paginatedData,

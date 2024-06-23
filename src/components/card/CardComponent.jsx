@@ -46,11 +46,11 @@ const CardComponent = ({
             alignItems="center"
             sx={{ width: "150px", marginRight: "8px" }}
           >
-            <Typography gutterBottom variant="h5" component="div">
-              {name}
-            </Typography>
             <Typography gutterBottom variant="subtitle1" component="div">
               {date}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="div">
+              {name}
             </Typography>
             <Chip
               color={status === "Success" ? "success" : "warning"}
