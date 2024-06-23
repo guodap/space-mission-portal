@@ -34,7 +34,8 @@
 }
 
 .card {
-  padding: 2em;
+  margin-bottom: 15px;
+  width: "20%";
 }
 
 .read-the-docs {
