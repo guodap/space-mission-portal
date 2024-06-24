@@ -7,6 +7,7 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import { CardOverflow } from "@mui/joy";
 import Chip from "@mui/joy/Chip";
+import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Box } from "@mui/material";
@@ -25,73 +26,109 @@ const CardComponent = ({
 }) => {
   return (
     // need better key?
-    <Card
-      size="sm"
-      className="card"
-      key={id}
-      orientation="horizontal"
-      sx={{ maxWidth: "100%", width: "100%" }}
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justify="center"
+      // style={{ minHeight: "100vh" }}
     >
-      {/* add default image? */}
-      <CardMedia
-        component="img"
-        alt={name}
-        sx={{ width: 100, height: 100 }}
-        image={image}
-      />
-      <CardContent sx={{ display: "flex", alignItems: "center", padding: 1 }}>
-        <Box display="flex" alignItems="center">
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            sx={{ width: "150px", marginRight: "8px" }}
-          >
-            <Typography gutterBottom variant="subtitle1" component="div">
-              {date}
-            </Typography>
-            <Typography gutterBottom variant="h5" component="div">
-              {name}
-            </Typography>
-            <Chip
-              color={status === "Success" ? "success" : "warning"}
-              size="sm"
+      <Card
+        size="sm"
+        className="card"
+        key={id}
+        orientation="horizontal"
+        sx={{ width: "80%", alignItems: "center" }}
+      >
+        {/* add default image? */}
+        <CardMedia
+          component="img"
+          alt={name}
+          sx={{
+            width: "100px",
+            height: "100px",
+            position: "left",
+            marginLeft: "1%",
+            marginRight: "1%",
+          }}
+          image={image}
+        />
+        <CardContent sx={{ display: "flex", alignItems: "center", padding: 1 }}>
+          <Grid display="flex" alignItems="center" sx={{ width: "100%" }}>
+            <Grid
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
               sx={{
-                borderRadius: "sm",
-                py: 0.25,
-                px: 0.5,
+                width: "25%",
+                marginRight: "10px",
+                marginLeft: "10px",
               }}
             >
-              {status}
-            </Chip>
-          </Box>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{
-              width: "300px",
-              height: "100%",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "-webkit-box",
-              WebkitBoxOrient: "vertical",
-              WebkitLineClamp: "10", // Adjust the number of lines to display
-            }}
-          >
-            {description}
-          </Typography>
-        </Box>
-      </CardContent>
-      <IconButton
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="YouTube link"
-        sx={{ color: "red", fontSize: "32px" }}
-      >
-        <YouTubeIcon fontSize="inherit" />
-      </IconButton>
-    </Card>
+              <Typography gutterBottom variant="subtitle1" component="div">
+                {date}
+              </Typography>
+              <Typography gutterBottom variant="h5" component="div">
+                {name}
+              </Typography>
+              <Chip
+                color={status === "Success" ? "success" : "warning"}
+                size="sm"
+                sx={{
+                  borderRadius: "sm",
+                  py: 0.25,
+                  px: 0.5,
+                }}
+              >
+                {status}
+              </Chip>
+            </Grid>
+            <Grid
+              sx={{
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+                textAlign: "center",
+                marginLeft: "5%",
+                marginRight: "5%",
+              }}
+            >
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: "10", // Adjust the number of lines to display
+                }}
+              >
+                {description}
+              </Typography>
+            </Grid>
+            <Grid>
+              <IconButton
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube link"
+                sx={{
+                  color: "red",
+                  fontSize: "40px",
+                  alignItems: "center",
+                  marginLeft: "5%",
+                  marginRight: "5%",
+                }}
+              >
+                <YouTubeIcon fontSize="inherit" />
+              </IconButton>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+    </Grid>
   );
 };
 

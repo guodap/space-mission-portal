@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button as MaterialButton } from "@mui/material";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import ArrowUpwardSharpIcon from "@mui/icons-material/ArrowUpwardSharp";
+import ArrowDownwardSharpIcon from "@mui/icons-material/ArrowDownwardSharp";
 
 import { Error } from "./Error";
 import { TableSkeleton } from "./Skeleton";
@@ -13,6 +13,10 @@ import { useData } from "../hooks/useData";
 import { usePagination } from "../hooks/usePagination";
 import { sortByTimestamp } from "../utils/sortData";
 
+import SortIcon from "@mui/icons-material/Sort";
+
+import Pagination from "@mui/material/Pagination";
+
 import "./LaunchDataPage.css";
 
 const LaunchDataPage = () => {
@@ -20,7 +24,7 @@ const LaunchDataPage = () => {
     "https://api.spacexdata.com/v4/launches"
   );
 
-  const [sortOrder, setSortOrder] = useState("ascending");
+  const [sortOrder, setSortOrder] = useState("descending");
 
   const toggleSortOrder = () => {
     const newSortOrder = sortOrder === "ascending" ? "descending" : "ascending";
@@ -56,13 +60,17 @@ const LaunchDataPage = () => {
       />
       {foundData && (
         <div>
-          <MaterialButton variant="text" onClick={toggleSortOrder}>
+          <MaterialButton
+            variant="text"
+            sx={{ color: "black" }}
+            onClick={toggleSortOrder}
+          >
             {sortOrder === "ascending" ? (
-              <KeyboardArrowUpIcon />
+              <ArrowUpwardSharpIcon />
             ) : (
-              <KeyboardArrowDownIcon />
+              <ArrowDownwardSharpIcon />
             )}
-            Sort by date
+            Date
           </MaterialButton>
         </div>
       )}
