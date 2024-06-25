@@ -93,9 +93,9 @@ const LaunchDataPage = () => {
             <Button disabled={!canGetNext} onClick={getNext} label={"Next"} />
             {totalPages ? <div> {`Page: ${currentPage}/${totalPages}`}</div> : null}
           </Grid>
-          <Grid>
+          {/* <Grid>
             <Breadcrumb />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
     </>
