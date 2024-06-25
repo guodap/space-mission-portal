@@ -25,7 +25,8 @@ const CardComponent = ({
   const isSmallScreen = useMediaQuery("(max-width: 1050px)");
 
   return (
-    <Grid
+    <Grid 
+      container
       spacing={0}
       alignItems="center"
       sx={{

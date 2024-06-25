@@ -52,7 +52,7 @@ const LaunchDataPage = () => {
 
   return (
     <>
-      <Grid container sx={{ justifyContent: "centre", flexDirection: "column", width: "100%"}}>
+      <Grid container sx={{ flexDirection: "column", width: "100%"}}>
         <Grid>
           <Grid>
             <h1>SpaceX Launches</h1>
