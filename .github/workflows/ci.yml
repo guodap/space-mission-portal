@@ -1,0 +1,49 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20.15.0"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Unit Tests
+        run: npm test
+
+      - name: Run npm Vulnerability Scan
+        run: |
+          npm audit --json > npm-audit.json || true
+          cat npm-audit.json
+
+      - name: Run Linting
+        run: npm run lint
+
+      - name: Archive npm Audit
+        if: always() # Always execute, even if previous steps fail
+        uses: actions/upload-artifact@v2
+        with:
+          name: npm-audit
+          path: npm-audit.json
+
+      - name: Notify GitHub PR status
+        if: always() # Always execute, even if previous steps fail
+        uses: rtCamp/github-actions-comment-pr@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: |
+            🚀 CI Pipeline completed successfully!
