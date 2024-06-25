@@ -41,9 +41,9 @@ jobs:
 
       - name: Notify GitHub PR status
         if: always() # Always execute, even if previous steps fail
-        uses: rtCamp/github-actions-comment-pr@v1
+        uses: guodap/space-mission-portal
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PIPELINE_SECRET }}
         with:
           msg: |
             🚀 CI Pipeline completed successfully!
