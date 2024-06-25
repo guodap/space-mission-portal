@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button as MaterialButton } from "@mui/material";
+import { Grid, Button as MaterialButton } from "@mui/material";
 import ArrowUpwardSharpIcon from "@mui/icons-material/ArrowUpwardSharp";
 import ArrowDownwardSharpIcon from "@mui/icons-material/ArrowDownwardSharp";
 
@@ -13,9 +13,7 @@ import { useData } from "../hooks/useData";
 import { usePagination } from "../hooks/usePagination";
 import { sortByTimestamp } from "../utils/sortData";
 
-import SortIcon from "@mui/icons-material/Sort";
-
-import Pagination from "@mui/material/Pagination";
+import Breadcrumb from "./Breadcrumb";
 
 import "./LaunchDataPage.css";
 
@@ -25,13 +23,6 @@ const LaunchDataPage = () => {
   );
 
   const [sortOrder, setSortOrder] = useState("descending");
-
-  const toggleSortOrder = () => {
-    const newSortOrder = sortOrder === "ascending" ? "descending" : "ascending";
-    setSortOrder(newSortOrder);
-    setPaginatedData(null);
-  };
-
   const sortedData = sortByTimestamp(data, sortOrder);
 
   const perPage = 10;
@@ -45,6 +36,15 @@ const LaunchDataPage = () => {
     getPrevious,
   } = usePagination(sortedData, perPage);
 
+
+  const toggleSortOrder = () => {
+    const newSortOrder = sortOrder === "ascending" ? "descending" : "ascending";
+    setSortOrder(newSortOrder);
+    const sortedData = sortByTimestamp(data, newSortOrder);
+    setPaginatedData(sortedData);
+  };
+
+
   if (loading) return <TableSkeleton />;
   if (error) return <Error />;
 
@@ -52,42 +52,52 @@ const LaunchDataPage = () => {
 
   return (
     <>
-      <h1>SpaceX Launches</h1>
-      <SearchBox
-        placeholder="Search by Name"
-        ariaLabel="Search for SpaceX Launches by name"
-        handlerFunction={searchByName}
-      />
-      {foundData && (
-        <div>
-          <MaterialButton
-            variant="text"
-            sx={{ color: "black" }}
-            onClick={toggleSortOrder}
-          >
-            {sortOrder === "ascending" ? (
-              <ArrowUpwardSharpIcon />
-            ) : (
-              <ArrowDownwardSharpIcon />
+      <Grid container sx={{ justifyContent: "centre", flexDirection: "column", width: "100%"}}>
+        <Grid>
+          <Grid>
+            <h1>SpaceX Launches</h1>
+          </Grid>
+          <Grid>
+            <SearchBox
+              placeholder="Search by Name"
+              ariaLabel="Search for SpaceX Launches by name"
+              handlerFunction={searchByName}
+            />
+          </Grid>
+          <Grid>
+            {foundData && (
+              <MaterialButton
+                variant="text"
+                sx={{ color: "black", margin: "10px 20px 10px 0", float: "right" }}
+                onClick={toggleSortOrder}
+              >
+                {sortOrder === "ascending" ? (
+                  <ArrowUpwardSharpIcon />
+                ) : (
+                  <ArrowDownwardSharpIcon />
+                )}
+                Date
+              </MaterialButton>
             )}
-            Date
-          </MaterialButton>
-        </div>
-      )}
-      {/* Note: Should restrict card gallery size as buttons bounce around page onClick and scroll is necessary ATM*/}
-      {/* BUG: After filtration, restore currentPage to 1 */}
-      {foundData ? (
-        <CardGallery data={paginatedData} />
-      ) : (
-        <div>No launch data found</div>
-      )}
-      <Button
-        disabled={!canGetPrevious}
-        onClick={getPrevious}
-        label={"Previous"}
-      />
-      <Button disabled={!canGetNext} onClick={getNext} label={"Next"} />
-      {totalPages ? <div> {`Page: ${currentPage}/${totalPages}`}</div> : null}
+          </Grid>
+        </Grid>
+        
+        {/* Note: Should restrict card gallery size as buttons bounce around page onClick and scroll is necessary ATM*/}
+        {/* BUG: After filtration, restore currentPage to 1 */}
+        <Grid>
+          <Grid>
+            {foundData ? (<CardGallery data={paginatedData} />) : (<div>No launch data found</div>)}
+          </Grid>
+          <Grid>
+            <Button disabled={!canGetPrevious} onClick={getPrevious} label={"Previous"}/>
+            <Button disabled={!canGetNext} onClick={getNext} label={"Next"} />
+            {totalPages ? <div> {`Page: ${currentPage}/${totalPages}`}</div> : null}
+          </Grid>
+          <Grid>
+            <Breadcrumb />
+          </Grid>
+        </Grid>
+      </Grid>
     </>
   ); //add error boundary to debug better
 };

@@ -1,20 +1,14 @@
 import * as React from "react";
-import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/joy/Card";
-import CardContent from "@mui/joy/CardContent";
-import { CardOverflow } from "@mui/joy";
 import Chip from "@mui/joy/Chip";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { useMediaQuery } from "@mui/material";
 
-import { Box } from "@mui/material";
-
-import spaceXLogo from "./spaceXLogo.png";
+import spaceXLogo from "../../assets/spaceXLogo.png";
 
 //NOTE - joy is beta release. Find alternative?
 
@@ -28,24 +22,20 @@ const CardComponent = ({
   linkName,
   status,
 }) => {
-  const isSmallScreen = useMediaQuery("(max-width: 600px)");
+  const isSmallScreen = useMediaQuery("(max-width: 1050px)");
 
   return (
     <Grid
-      container
       spacing={0}
       alignItems="center"
       sx={{
-        flexWrap: "wrap",
-        width: "100%",
-        minWidth: isSmallScreen ? "100%" : "500px",
-        margin: "0 auto",
+        minWidth: isSmallScreen ? "100%" : "1050px",
       }}
     >
       <Card
         size="sm"
         className="card"
-        key={id}
+        key={name}
         orientation="horizontal"
         sx={{
           width: "100%",
