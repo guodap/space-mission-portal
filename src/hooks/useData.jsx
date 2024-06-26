@@ -22,7 +22,7 @@ export const useData = (url) => {
       }
     };
     handleData();
-  }, []);
+  }, [url]);
 
   const searchByName = (input) => {
     setSearchData(input ? filterDataByName(data, input) : null);

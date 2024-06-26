@@ -12,14 +12,13 @@ export const usePagination = (data: []) => {
         currentPage * ITEMS_PER_PAGE
       )
     ); //have loading and error states? Needed?
-  }, [data, currentPage, paginatedData]);
+  }, [data, currentPage]);
 
   const totalPages = Math.ceil(data?.length / ITEMS_PER_PAGE);
 
   const canGetPrevious = currentPage > 1;
   const canGetNext = currentPage < totalPages;
 
-  //REUSE DATA?
   //   const handlePageChange = (oldPage, direction) => {
   //     setCurrentPage(direction === "next" ? oldPage + 1 : oldPage - 1);
   //   };

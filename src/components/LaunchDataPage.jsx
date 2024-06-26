@@ -25,6 +25,7 @@ const LaunchDataPage = () => {
   const {
     currentPage,
     paginatedData,
+    setPaginatedData,
     totalPages,
     canGetNext,
     canGetPrevious,
@@ -101,9 +102,6 @@ const LaunchDataPage = () => {
               <div> {`Page: ${currentPage}/${totalPages}`}</div>
             ) : null}
           </Grid>
-          {/* <Grid>
-            <Breadcrumb />
-          </Grid> */}
         </Grid>
       </Grid>
     </>
