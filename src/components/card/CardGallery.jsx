@@ -10,9 +10,9 @@ const CardGallery = ({ data }) => {
           name={launch.name}
           description={launch.details}
           date={timestampToDate(launch.date_local)}
-          image={launch.links.patch.small}
+          imagePath={launch.links.patch.small}
           link={launch.links.webcast}
-          linkName={"Youtube"} //Display in a more visually appealing way? //get link to work
+          linkName={"Youtube"}
           status={launch.success ? "Success" : "Failure"}
         />
       ))}

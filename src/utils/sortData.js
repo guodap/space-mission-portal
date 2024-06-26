@@ -1,4 +1,4 @@
-export const sortByTimestamp = (data, order = "ascending") => {
+export const sortByTimestamp = (data, order = "descending") => {
   if (!data || !data.length) return;
   try {
     const sorted = data?.sort((a, b) => {
