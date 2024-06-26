@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-const DEFAULT_DATE_FORMAT = "DD-MM-YYYY";
+const DEFAULT_DATE_FORMAT = "D MMMM, YYYY";
 
 export const timestampToDate = (timestamp, format = DEFAULT_DATE_FORMAT) => {
   try {

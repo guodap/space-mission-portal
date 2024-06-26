@@ -13,15 +13,15 @@ const LaunchRecordsTable = ({ data }) => {
       name: "Date",
       selector: (row) => row.date_local,
       sortable: true,
-      cell: (row) => timestampToDate(row.date_local), //what does local date mean? Is time important?
+      cell: (row) => timestampToDate(row.date_local),
     },
     {
       name: "Status",
-      selector: (row) => (row.success ? "Success" : "Failure"), //Display in a more visually appealing way?
+      selector: (row) => (row.success ? "Success" : "Failure"), //Display in a more visually appealing way
     },
     //{
     //  name: "Launch Details",
-    //  selector: (row) => row.details, //Failing, why?
+    //  selector: (row) => row.details, //Not working
     //},
     {
       name: "Image",
@@ -36,14 +36,11 @@ const LaunchRecordsTable = ({ data }) => {
           ></img>
         ) : null,
     },
-    //Display in a more visually appealing way?
-    //Embedded mode?
-    //Open in another tab?
     {
       name: "Link",
       selector: (row) => row.links.webcast,
       cell: (row) =>
-        row.links.webcast ? <a href={row.links.webcast}>Youtube Link</a> : null, //Display in a more visually appealing way?
+        row.links.webcast ? <a href={row.links.webcast}>Youtube Link</a> : null, //Display in a more visually appealing way, open in another tab
     },
   ];
 
