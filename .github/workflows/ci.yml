@@ -41,7 +41,7 @@ jobs:
 
       - name: Notify GitHub PR status
         if: always()
-        uses: guodap/space-mission-portal
+        uses: guodap/space-mission-portal@main
         env:
           GITHUB_TOKEN: ${{ secrets.PIPELINE_SECRET }}
         with:
