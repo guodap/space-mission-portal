@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/joy/Card";
@@ -20,13 +19,13 @@ const CardComponent = ({
   date,
   imagePath,
   link,
-  linkName,
   status,
 }) => {
   const isSmallScreen = useMediaQuery("(max-width: 1050px)");
 
   return (
     <Grid
+      key={id}
       container
       spacing={0}
       alignItems="center"
@@ -122,8 +121,7 @@ CardComponent.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  imagePath: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
-  linkName: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
 };
