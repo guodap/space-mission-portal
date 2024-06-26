@@ -74,7 +74,7 @@ const LaunchDataPage = () => {
                 ) : (
                   <ArrowDownwardSharpIcon />
                 )}
-                Date
+                Sort by Date
               </MaterialButton>
             )}
           </Grid>
