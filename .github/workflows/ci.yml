@@ -40,7 +40,7 @@ jobs:
           path: npm-audit.json
 
       - name: Notify GitHub PR status
-        if: always() # Always execute, even if previous steps fail
+        if: always()
         uses: guodap/space-mission-portal
         env:
           GITHUB_TOKEN: ${{ secrets.PIPELINE_SECRET }}
