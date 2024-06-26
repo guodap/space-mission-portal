@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { timestampToDate } from "../../utils/formatDate";
 import CardComponent from "./CardComponent";
 
@@ -6,7 +7,7 @@ const CardGallery = ({ data }) => {
     <>
       {data.map((launch) => (
         <CardComponent
-          id={launch.id}
+          key={launch.id}
           name={launch.name}
           description={launch.details}
           date={timestampToDate(launch.date_local)}
@@ -21,3 +22,7 @@ const CardGallery = ({ data }) => {
 };
 
 export default CardGallery;
+
+CardGallery.propTypes = {
+  data: PropTypes.any.isRequired,
+};
