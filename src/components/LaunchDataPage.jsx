@@ -13,19 +13,15 @@ import { useData } from "../hooks/useData";
 import { usePagination } from "../hooks/usePagination";
 import { sortByTimestamp } from "../utils/sortData";
 
-import Breadcrumb from "./Breadcrumb";
-
 import "./LaunchDataPage.css";
+import { API_URL } from "../constants/constants";
 
 const LaunchDataPage = () => {
-  const { data, loading, error, searchByName } = useData(
-    "https://api.spacexdata.com/v4/launches"
-  );
+  const { data, loading, error, searchByName } = useData(API_URL);
 
   const [sortOrder, setSortOrder] = useState("descending");
   const sortedData = sortByTimestamp(data, sortOrder);
 
-  const perPage = 10;
   const {
     currentPage,
     paginatedData,
@@ -34,8 +30,7 @@ const LaunchDataPage = () => {
     canGetPrevious,
     getNext,
     getPrevious,
-  } = usePagination(sortedData, perPage);
-
+  } = usePagination(sortedData);
 
   const toggleSortOrder = () => {
     const newSortOrder = sortOrder === "ascending" ? "descending" : "ascending";
@@ -44,7 +39,6 @@ const LaunchDataPage = () => {
     setPaginatedData(sortedData);
   };
 
-
   if (loading) return <TableSkeleton />;
   if (error) return <Error />;
 
@@ -52,7 +46,7 @@ const LaunchDataPage = () => {
 
   return (
     <>
-      <Grid container sx={{ flexDirection: "column", width: "100%"}}>
+      <Grid container sx={{ flexDirection: "column", width: "100%" }}>
         <Grid>
           <Grid>
             <h1>SpaceX Launches</h1>
@@ -68,7 +62,11 @@ const LaunchDataPage = () => {
             {foundData && (
               <MaterialButton
                 variant="text"
-                sx={{ color: "black", margin: "10px 20px 10px 0", float: "right" }}
+                sx={{
+                  color: "black",
+                  margin: "10px 20px 10px 0",
+                  float: "right",
+                }}
                 onClick={toggleSortOrder}
               >
                 {sortOrder === "ascending" ? (
@@ -81,17 +79,27 @@ const LaunchDataPage = () => {
             )}
           </Grid>
         </Grid>
-        
+
         {/* Note: Should restrict card gallery size as buttons bounce around page onClick and scroll is necessary ATM*/}
         {/* BUG: After filtration, restore currentPage to 1 */}
         <Grid>
           <Grid>
-            {foundData ? (<CardGallery data={paginatedData} />) : (<div>No launch data found</div>)}
+            {foundData ? (
+              <CardGallery data={paginatedData} />
+            ) : (
+              <div>No launch data found</div>
+            )}
           </Grid>
           <Grid>
-            <Button disabled={!canGetPrevious} onClick={getPrevious} label={"Previous"}/>
+            <Button
+              disabled={!canGetPrevious}
+              onClick={getPrevious}
+              label={"Previous"}
+            />
             <Button disabled={!canGetNext} onClick={getNext} label={"Next"} />
-            {totalPages ? <div> {`Page: ${currentPage}/${totalPages}`}</div> : null}
+            {totalPages ? (
+              <div> {`Page: ${currentPage}/${totalPages}`}</div>
+            ) : null}
           </Grid>
           {/* <Grid>
             <Breadcrumb />
