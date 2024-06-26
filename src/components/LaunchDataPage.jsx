@@ -1,49 +1,39 @@
-import { useState } from "react";
 import { Grid, Button as MaterialButton } from "@mui/material";
 import ArrowUpwardSharpIcon from "@mui/icons-material/ArrowUpwardSharp";
 import ArrowDownwardSharpIcon from "@mui/icons-material/ArrowDownwardSharp";
+import Pagination from "@mui/material/Pagination";
 
 import { Error } from "./Error";
 import { TableSkeleton } from "./Skeleton";
 import CardGallery from "./card/CardGallery";
-import { Button } from "./Button";
 import { SearchBox } from "./SearchBox";
 
 import { useData } from "../hooks/useData";
 import { usePagination } from "../hooks/usePagination";
-import { sortByTimestamp } from "../utils/sortData";
 
 import "./LaunchDataPage.css";
 import { API_URL } from "../constants/constants";
+import { useDataSort } from "../hooks/useDataSort";
 
 const LaunchDataPage = () => {
   const { data, loading, error, searchByName } = useData(API_URL);
-
-  const [sortOrder, setSortOrder] = useState("descending");
-  const sortedData = sortByTimestamp(data, sortOrder);
-
-  const {
-    currentPage,
-    paginatedData,
-    setPaginatedData,
-    totalPages,
-    canGetNext,
-    canGetPrevious,
-    getNext,
-    getPrevious,
-  } = usePagination(sortedData);
-
-  const toggleSortOrder = () => {
-    const newSortOrder = sortOrder === "ascending" ? "descending" : "ascending";
-    setSortOrder(newSortOrder);
-    const sortedData = sortByTimestamp(data, newSortOrder);
-    setPaginatedData(sortedData);
-  };
+  const { sortedData, sortOrder, toggleSortOrder } = useDataSort(data);
+  const { paginatedData, totalPages, setCurrentPage } =
+    usePagination(sortedData);
 
   if (loading) return <TableSkeleton />;
   if (error) return <Error />;
 
   const foundData = paginatedData && paginatedData.length;
+
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+
+  const handleSort = (event, page) => {
+    toggleSortOrder();
+    setCurrentPage(3);
+  };
 
   return (
     <>
@@ -68,7 +58,7 @@ const LaunchDataPage = () => {
                   margin: "10px 20px 10px 0",
                   float: "right",
                 }}
-                onClick={toggleSortOrder}
+                onClick={handleSort}
               >
                 {sortOrder === "ascending" ? (
                   <ArrowUpwardSharpIcon />
@@ -92,15 +82,11 @@ const LaunchDataPage = () => {
             )}
           </Grid>
           <Grid>
-            <Button
-              disabled={!canGetPrevious}
-              onClick={getPrevious}
-              label={"Previous"}
+            <Pagination
+              count={totalPages}
+              size="large"
+              onChange={handlePageChange}
             />
-            <Button disabled={!canGetNext} onClick={getNext} label={"Next"} />
-            {totalPages ? (
-              <div> {`Page: ${currentPage}/${totalPages}`}</div>
-            ) : null}
           </Grid>
         </Grid>
       </Grid>

@@ -12,33 +12,18 @@ export const usePagination = (data: []) => {
         currentPage * ITEMS_PER_PAGE
       )
     ); //have loading and error states? Needed?
-  }, [data, currentPage]);
+  }, [data, currentPage, paginatedData]);
 
   const totalPages = Math.ceil(data?.length / ITEMS_PER_PAGE);
 
-  const canGetPrevious = currentPage > 1;
-  const canGetNext = currentPage < totalPages;
-
-  //   const handlePageChange = (oldPage, direction) => {
-  //     setCurrentPage(direction === "next" ? oldPage + 1 : oldPage - 1);
-  //   };
-
-  const getNext = () => {
-    if (canGetNext) setCurrentPage((oldPage) => oldPage + 1);
-  };
-
-  const getPrevious = () => {
-    if (canGetPrevious) setCurrentPage((oldPage) => oldPage - 1);
+  const changePage = (p) => {
+    setCurrentPage(p);
   };
 
   return {
-    currentPage,
     paginatedData,
     setPaginatedData,
     totalPages,
-    canGetNext,
-    canGetPrevious,
-    getNext,
-    getPrevious,
+    changePage,
   };
 };
