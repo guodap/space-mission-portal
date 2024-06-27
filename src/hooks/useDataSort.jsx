@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { sortByTimestamp } from "../utils/sortData";
 
-export const useDataSort = (data, initialDirection = "descending") => {
-  const [sortOrder, setSortOrder] = useState(initialDirection);
+export const useDataSort = (data) => {
+  const [sortOrder, setSortOrder] = useState("descending");
   const [sortedData, setSortedData] = useState([]);
 
   useEffect(() => {
-    setSortedData(sortByTimestamp(data, sortOrder));
-    console.log(sortOrder);
-  }, [data, sortOrder]);
+    const newSortedData = sortByTimestamp(data, sortOrder);
+    setSortedData(newSortedData);
+  }, [data, sortedData, sortOrder]);
 
   const toggleSortOrder = () => {
-    setSortOrder((currentSortOrder) =>
-      currentSortOrder === "descending" ? "ascending" : "descending"
+    setSortOrder((sortOrder) =>
+      sortOrder === "descending" ? "ascending" : "descending"
     );
   };
 

@@ -17,23 +17,22 @@ import { useDataSort } from "../hooks/useDataSort";
 
 const LaunchDataPage = () => {
   const { data, loading, error, searchByName } = useData(API_URL);
+
   const { sortedData, sortOrder, toggleSortOrder } = useDataSort(data);
-  const { paginatedData, totalPages, setCurrentPage } =
-    usePagination(sortedData);
-
-  if (loading) return <TableSkeleton />;
-  if (error) return <Error />;
-
-  const foundData = paginatedData && paginatedData.length;
+  const { paginatedData, totalPages, setCurrentPage } = usePagination(
+    sortedData,
+    sortOrder
+  );
 
   const handlePageChange = (event, page) => {
     setCurrentPage(page);
   };
 
-  const handleSort = (event, page) => {
-    toggleSortOrder();
-    setCurrentPage(3);
-  };
+  const foundData = paginatedData && paginatedData.length;
+
+  if (loading) return <TableSkeleton />;
+  // if (!totalPages) return <TableSkeleton />;
+  if (error) return <Error />;
 
   return (
     <>
@@ -44,9 +43,9 @@ const LaunchDataPage = () => {
           </Grid>
           <Grid>
             <SearchBox
-              placeholder="Search by Name"
               ariaLabel="Search for SpaceX Launches by name"
               handlerFunction={searchByName}
+              placeholder="Search by Name"
             />
           </Grid>
           <Grid>
@@ -55,10 +54,10 @@ const LaunchDataPage = () => {
                 variant="text"
                 sx={{
                   color: "black",
-                  margin: "10px 20px 10px 0",
                   float: "right",
+                  margin: "10px 20px 10px 0",
                 }}
-                onClick={handleSort}
+                onClick={toggleSortOrder}
               >
                 {sortOrder === "ascending" ? (
                   <ArrowUpwardSharpIcon />
@@ -86,6 +85,12 @@ const LaunchDataPage = () => {
               count={totalPages}
               size="large"
               onChange={handlePageChange}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                left: "100%",
+                right: "100%",
+              }}
             />
           </Grid>
         </Grid>

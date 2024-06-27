@@ -116,12 +116,12 @@ const CardComponent = ({
 
 export default CardComponent;
 
-CardComponent.propTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  imagePath: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
-};
+// CardComponent.propTypes = {
+//   id: PropTypes.number.isRequired,
+//   name: PropTypes.string.isRequired,
+//   description: PropTypes.string.isRequired,
+//   date: PropTypes.string.isRequired,
+//   imagePath: PropTypes.string.isRequired,
+//   link: PropTypes.string.isRequired,
+//   status: PropTypes.string.isRequired,
+// };

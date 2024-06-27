@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ITEMS_PER_PAGE } from "../constants/constants";
 
-export const usePagination = (data: []) => {
+export const usePagination = (data: [], sortOrder) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [paginatedData, setPaginatedData] = useState([]);
 
@@ -12,18 +12,13 @@ export const usePagination = (data: []) => {
         currentPage * ITEMS_PER_PAGE
       )
     ); //have loading and error states? Needed?
-  }, [data, currentPage, paginatedData]);
+  }, [data, currentPage, sortOrder]); //fixes logic paginatedData
 
   const totalPages = Math.ceil(data?.length / ITEMS_PER_PAGE);
 
-  const changePage = (p) => {
-    setCurrentPage(p);
-  };
-
   return {
     paginatedData,
-    setPaginatedData,
     totalPages,
-    changePage,
+    setCurrentPage,
   };
 };
