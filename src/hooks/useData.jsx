@@ -27,6 +27,5 @@ export const useData = (url) => {
   const searchByName = (input) => {
     setSearchData(input ? filterDataByName(data, input) : null);
   };
-
   return { data: searchData || data, loading, error, searchByName };
 };

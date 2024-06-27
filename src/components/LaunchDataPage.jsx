@@ -28,6 +28,11 @@ const LaunchDataPage = () => {
     setCurrentPage(page);
   };
 
+  const handleSearchInput = (input) => {
+    searchByName(input);
+    setCurrentPage(1);
+  };
+
   const foundData = paginatedData && paginatedData.length;
 
   if (loading) return <TableSkeleton />;
@@ -44,7 +49,7 @@ const LaunchDataPage = () => {
           <Grid>
             <SearchBox
               ariaLabel="Search for SpaceX Launches by name"
-              handlerFunction={searchByName}
+              handlerFunction={handleSearchInput}
               placeholder="Search by Name"
             />
           </Grid>
