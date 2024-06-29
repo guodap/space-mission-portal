@@ -13,11 +13,10 @@ import { useData } from "../hooks/useData";
 import { usePagination } from "../hooks/usePagination";
 
 import "./LaunchDataPage.css";
-import { API_URL } from "../constants/constants";
 import { useDataSort } from "../hooks/useDataSort";
 
 const LaunchDataPage = () => {
-  const { data, loading, error, searchByName } = useData(API_URL);
+  const { data, loading, error, searchByName } = useData();
   const { sortedData, sortOrder, toggleSortOrder } = useDataSort(data);
   const { paginatedData, totalPages, currentPage, setCurrentPage } =
     usePagination(sortedData);
@@ -97,7 +96,7 @@ const LaunchDataPage = () => {
         ) : null}
       </Grid>
     </Grid>
-  ); //add error boundary to debug better
+  );
 };
 
 export default LaunchDataPage;

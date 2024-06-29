@@ -6,7 +6,7 @@ import { DEFAULT_DATE_FORMAT } from "../constants/constants";
  * @param {string} timestamp - The timestamp to convert. A string representing a date or time (e.g., "2024-06-28", "2024-06-28T12:00:00").
  * @return {string} The date in "D MMMM, YYYY" format.
  */
-export const convertTimestampToDate = (timestamp) => {
+const convertTimestampToDate = (timestamp) => {
   if (!timestamp || typeof timestamp !== "string") return "";
 
   const parsedTimestamp = dayjs(timestamp);
@@ -14,3 +14,5 @@ export const convertTimestampToDate = (timestamp) => {
 
   return parsedTimestamp.format(DEFAULT_DATE_FORMAT);
 };
+
+export default convertTimestampToDate;

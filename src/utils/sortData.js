@@ -23,8 +23,9 @@ export const sortByTimestamp = (data = [], order = "descending") => {
   // Sort the cloned array
   try {
     const sorted = dataClone.sort((a, b) => {
-      const dateA = parseDate(a.date_local);
-      const dateB = parseDate(b.date_local);
+      console.log(a, b);
+      const dateA = parseDate(a.date);
+      const dateB = parseDate(b.date);
 
       if (!dateA || !dateB) return 0; // Treat invalid dates as equal for sorting purposes
 

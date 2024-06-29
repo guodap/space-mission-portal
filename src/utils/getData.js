@@ -1,4 +1,6 @@
 import axios from "axios";
+import { API_URL } from "../constants/constants";
+// import spaceXLogo from "../assets/spaceXLogo.png";
 
 /**
  * Fetches data from an API endpoint.
@@ -6,7 +8,7 @@ import axios from "axios";
  * @returns {Promise<Array<object>>} - A promise that resolves to the data fetched from the API endpoint or an empty array if the request fails.
  * @throws {Error} - Throws an error if the request fails.
  */
-export const getData = async (url) => {
+const getData = async (url) => {
   if (typeof url !== "string" || !url.trim()) return [];
 
   try {
@@ -15,4 +17,29 @@ export const getData = async (url) => {
   } catch (e) {
     throw new Error(`Failed to fetch data from ${url}: ${e}`);
   }
+};
+
+/**
+ * Retrieves, formats required launch data from the provided URL and adds fallback values.
+ *
+ * @param {string} url - The URL of the API endpoint to fetch launch data from.
+ * @return {Array<object>} An array of formatted launch data objects.
+ */
+
+export const getFormattedLaunchData = async () => {
+  const launchData = await getData(API_URL);
+
+  const filteredLaunchData = launchData.map((launch) => ({
+    id: launch?.id,
+    name: launch?.name || "",
+    description: launch?.details || "",
+    date: launch?.date_local || "",
+    imagePath: launch?.links?.patch?.small || "",
+    link: launch?.links?.webcast || "",
+    status: launch.success ? "Success" : "Failure",
+  }));
+
+  console.log(filteredLaunchData);
+
+  return filteredLaunchData;
 };

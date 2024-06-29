@@ -7,13 +7,12 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { useMediaQuery } from "@mui/material";
-
+import convertTimestampToDate from "../../utils/formatDate";
 import spaceXLogo from "../../assets/spaceXLogo.png";
 
 //NOTE - joy is beta release. Find alternative?
 
 const CardComponent = ({
-  id,
   name,
   description,
   date,
@@ -25,7 +24,6 @@ const CardComponent = ({
 
   return (
     <Grid
-      key={id}
       container
       spacing={0}
       alignItems="center"
@@ -58,11 +56,11 @@ const CardComponent = ({
             left: "auto",
             right: "auto",
           }}
-          image={imagePath ? imagePath : spaceXLogo}
+          image={imagePath || spaceXLogo}
         />
         <Grid sx={{ width: "200px" }}>
           <Typography gutterBottom variant="subtitle1" component="div">
-            {date}
+            {convertTimestampToDate(date)}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
             {name}
@@ -82,7 +80,7 @@ const CardComponent = ({
             </Chip>
           )}
         </Grid>
-        {description && (
+        {
           <Typography
             variant="body2"
             color="text.secondary"
@@ -97,7 +95,7 @@ const CardComponent = ({
           >
             {description}
           </Typography>
-        )}
+        }
         {link && (
           <IconButton
             href={link}
@@ -121,7 +119,6 @@ const CardComponent = ({
 };
 
 CardComponent.propTypes = {
-  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   description: PropTypes.string,
   date: PropTypes.string.isRequired,
