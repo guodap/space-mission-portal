@@ -1,15 +1,39 @@
-export const sortByTimestamp = (data, order = "descending") => {
-  if (!data || !data.length) return;
+/**
+ * Sorts an array of objects by a timestamp property.
+ * @param {Array} data - The array of objects to sort.
+ * @param {string} order - The order to sort by ("ascending" or "descending").
+ * @returns {Array} - The sorted array.
+ */
+export const sortByTimestamp = (data = [], order = "descending") => {
+  if (!Array.isArray(data) || data.length === 0) return [];
+
+  // Validate the order parameter
+  const validOrder = order === "ascending" ? "ascending" : "descending";
+
+  // Helper function to parse and validate dates
+  const parseDate = (dateString) => {
+    const date = new Date(dateString);
+    if (isNaN(date)) return null;
+    return date;
+  };
+
+  // Clone the array to avoid mutating the original
+  const dataClone = [...data];
+
+  // Sort the cloned array
   try {
-    const sorted = data?.sort((a, b) => {
-      const dateA = new Date(a.date_local);
-      const dateB = new Date(b.date_local);
-      if (order === "ascending") return dateA - dateB;
+    const sorted = dataClone.sort((a, b) => {
+      const dateA = parseDate(a.date_local);
+      const dateB = parseDate(b.date_local);
+
+      if (!dateA || !dateB) return 0; // Treat invalid dates as equal for sorting purposes
+
+      if (validOrder === "ascending") return dateA - dateB;
       return dateB - dateA;
     });
+
     return sorted;
-  } catch (e) {
-    console.log(`An error occurred while sorting data in ${order} order: ${e}`);
-    return;
+  } catch {
+    return [];
   }
 };

@@ -1,10 +1,11 @@
+import { useCallback } from "react";
 import { Grid, Button as MaterialButton } from "@mui/material";
 import ArrowUpwardSharpIcon from "@mui/icons-material/ArrowUpwardSharp";
 import ArrowDownwardSharpIcon from "@mui/icons-material/ArrowDownwardSharp";
 import Pagination from "@mui/material/Pagination";
 
 import { Error } from "./Error";
-import { TableSkeleton } from "./Skeleton";
+import { LoadingSkeleton } from "./Skeleton";
 import CardGallery from "./card/CardGallery";
 import { SearchBox } from "./SearchBox";
 
@@ -17,91 +18,88 @@ import { useDataSort } from "../hooks/useDataSort";
 
 const LaunchDataPage = () => {
   const { data, loading, error, searchByName } = useData(API_URL);
-
   const { sortedData, sortOrder, toggleSortOrder } = useDataSort(data);
-  const { paginatedData, totalPages, setCurrentPage } = usePagination(
-    sortedData,
-    sortOrder
+  const { paginatedData, totalPages, currentPage, setCurrentPage } =
+    usePagination(sortedData);
+
+  const handlePageChange = useCallback(
+    (event, page) => {
+      setCurrentPage(page);
+    },
+    [setCurrentPage]
   );
 
-  const handlePageChange = (event, page) => {
-    setCurrentPage(page);
-  };
+  const handleSearchInput = useCallback(
+    (input) => {
+      searchByName(input);
+      setCurrentPage(1);
+    },
+    [searchByName, setCurrentPage]
+  );
 
-  const handleSearchInput = (input) => {
-    searchByName(input);
-    setCurrentPage(1);
-  };
+  const foundData = !loading && !error && paginatedData && paginatedData.length;
 
-  const foundData = paginatedData && paginatedData.length;
-
-  if (loading) return <TableSkeleton />;
-  // if (!totalPages) return <TableSkeleton />;
+  if (loading) return <LoadingSkeleton />;
   if (error) return <Error />;
 
   return (
-    <>
-      <Grid container sx={{ flexDirection: "column", width: "100%" }}>
+    <Grid container sx={{ flexDirection: "column", width: "100%" }}>
+      <Grid>
         <Grid>
-          <Grid>
-            <h1>SpaceX Launches</h1>
-          </Grid>
-          <Grid>
-            <SearchBox
-              ariaLabel="Search for SpaceX Launches by name"
-              handlerFunction={handleSearchInput}
-              placeholder="Search by Name"
-            />
-          </Grid>
-          <Grid>
-            {foundData && (
-              <MaterialButton
-                variant="text"
-                sx={{
-                  color: "black",
-                  float: "right",
-                  margin: "10px 20px 10px 0",
-                }}
-                onClick={toggleSortOrder}
-              >
-                {sortOrder === "ascending" ? (
-                  <ArrowUpwardSharpIcon />
-                ) : (
-                  <ArrowDownwardSharpIcon />
-                )}
-                Sort by Date
-              </MaterialButton>
-            )}
-          </Grid>
+          <h1>SpaceX Launches</h1>
         </Grid>
-
-        {/* Note: Should restrict card gallery size as buttons bounce around page onClick and scroll is necessary ATM*/}
-        {/* BUG: After filtration, restore currentPage to 1 */}
         <Grid>
+          <SearchBox
+            ariaLabel="Search for SpaceX Launches by name"
+            handlerFunction={handleSearchInput}
+            placeholder="Search by Name"
+          />
+        </Grid>
+        {foundData ? (
           <Grid>
-            {foundData ? (
-              <CardGallery data={paginatedData} />
-            ) : (
-              <div>No launch data found</div>
-            )}
-          </Grid>
-          <Grid>
-            <Pagination
-              count={totalPages}
-              size="large"
-              onChange={handlePageChange}
+            <MaterialButton
+              variant="text"
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                left: "100%",
-                right: "100%",
+                color: "black",
+                float: "right",
+                margin: "10px 20px 10px 0",
               }}
-            />
+              onClick={toggleSortOrder}
+            >
+              {sortOrder === "ascending" ? (
+                <ArrowUpwardSharpIcon />
+              ) : (
+                <ArrowDownwardSharpIcon />
+              )}
+              <span style={{ textTransform: "none" }}>Sort by Date</span>
+            </MaterialButton>
           </Grid>
-        </Grid>
+        ) : null}
       </Grid>
-    </>
+
+      <Grid>
+        {foundData ? (
+          <CardGallery data={paginatedData} />
+        ) : (
+          <div>No launch data matched your input</div>
+        )}
+        {foundData ? (
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            size="large"
+            onChange={handlePageChange}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          />
+        ) : null}
+      </Grid>
+    </Grid>
   ); //add error boundary to debug better
 };
 
 export default LaunchDataPage;
+
+// TO DO: Add error boundary for better debugging

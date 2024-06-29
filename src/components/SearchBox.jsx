@@ -13,10 +13,10 @@ export const SearchBox = ({ placeholder, ariaLabel, handlerFunction }) => {
       className="search-input"
       style={{
         backgroundColor: "white",
-        borderBlockStyle: "solid",
+        borderStyle: "solid",
         borderColor: "grey",
         borderRadius: "20px",
-        borderBlockWidth: "100%",
+        borderWidth: "1px",
         height: "50px",
       }}
     />
@@ -26,5 +26,5 @@ export const SearchBox = ({ placeholder, ariaLabel, handlerFunction }) => {
 SearchBox.propTypes = {
   placeholder: PropTypes.string.isRequired,
   ariaLabel: PropTypes.string.isRequired,
-  handlerFunction: PropTypes.any.isRequired,
+  handlerFunction: PropTypes.func.isRequired,
 };

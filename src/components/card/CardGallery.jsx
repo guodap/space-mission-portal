@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { timestampToDate } from "../../utils/formatDate";
 import CardComponent from "./CardComponent";
+import { convertTimestampToDate } from "../../utils/formatDate";
 
 const CardGallery = ({ data }) => {
   return (
@@ -10,7 +10,7 @@ const CardGallery = ({ data }) => {
           key={launch.id}
           name={launch.name}
           description={launch.details}
-          date={timestampToDate(launch.date_local)}
+          date={convertTimestampToDate(launch.date_local)}
           imagePath={launch.links.patch.small}
           link={launch.links.webcast}
           linkName={"Youtube"}
@@ -21,8 +21,21 @@ const CardGallery = ({ data }) => {
   );
 };
 
-export default CardGallery;
-
 CardGallery.propTypes = {
-  data: PropTypes.any.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      details: PropTypes.string,
+      date_local: PropTypes.string.isRequired,
+      links: PropTypes.shape({
+        patch: PropTypes.shape({
+          small: PropTypes.string,
+        }),
+        webcast: PropTypes.string,
+      }),
+      success: PropTypes.bool,
+    })
+  ),
 };
+
+export default CardGallery;
