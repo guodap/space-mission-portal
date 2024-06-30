@@ -1,3 +1,5 @@
+import { LOADING_MESSAGE } from "../constants/constants";
+
 export const LoadingSkeleton = () => {
-  return <div>Loading...</div>;
+  return <div>{LOADING_MESSAGE}</div>;
 };

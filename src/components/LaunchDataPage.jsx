@@ -9,6 +9,11 @@ import { LoadingSkeleton } from "./Skeleton";
 import CardGallery from "./card/CardGallery";
 
 import { useData } from "../hooks/data/useData";
+import {
+  NO_LAUNCH_DATA_MESSAGE,
+  SORT_BY_DATE_LABEL,
+  HEADER,
+} from "../constants/constants";
 
 import "./LaunchDataPage.css";
 
@@ -32,7 +37,7 @@ const LaunchDataPage = () => {
     <Grid container sx={{ flexDirection: "column", width: "100%" }}>
       <Grid>
         <Grid>
-          <h1>SpaceX Launches</h1>
+          <h1>{HEADER}</h1>
         </Grid>
         <Grid>
           <SearchBox
@@ -57,7 +62,9 @@ const LaunchDataPage = () => {
               ) : (
                 <ArrowDownwardSharpIcon />
               )}
-              <span style={{ textTransform: "none" }}>Sort by Date</span>
+              <span style={{ textTransform: "none" }}>
+                {SORT_BY_DATE_LABEL}
+              </span>
             </MaterialButton>
           </Grid>
         ) : null}
@@ -67,7 +74,7 @@ const LaunchDataPage = () => {
         {paginatedData?.length ? (
           <CardGallery data={paginatedData} />
         ) : (
-          <div>No launch data matched your input</div>
+          <div>{NO_LAUNCH_DATA_MESSAGE}</div>
         )}
         {paginatedData?.length ? (
           <Pagination

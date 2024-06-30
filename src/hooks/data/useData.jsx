@@ -11,10 +11,10 @@ export const useData = () => {
   //Sort fetched data
   const { sortedData, sortOrder, toggleSortOrder } = useDataSort(data);
 
-  //Search
+  //Filter sorted data
   const { searchData, searchByName } = useDataSearch(sortedData);
 
-  //Paginate
+  //Paginate sorted and filtered data
   const {
     paginatedData,
     totalPages,

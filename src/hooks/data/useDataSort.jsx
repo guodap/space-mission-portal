@@ -5,9 +5,8 @@ export const useDataSort = (data) => {
   const [sortOrder, setSortOrder] = useState("descending");
   const [sortedData, setSortedData] = useState([]);
 
-  // Runs when data is fetched or user clicks sort button
   useEffect(() => {
-    // Skip first mount and only run when data is fetched
+    // Skip first mount and only set state when data is fetched or user clicks sort button
     if (!data) return;
 
     const newSortedData = sortByTimestamp(data, sortOrder);

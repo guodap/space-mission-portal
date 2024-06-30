@@ -6,7 +6,7 @@ export const useDataPagination = (data) => {
   const [paginatedData, setPaginatedData] = useState([]);
 
   useEffect(() => {
-    // Skip first mount and only run when data is fetched
+    // Skip first mount and only set state when data is fetched
     if (!data) return;
 
     setPaginatedData(

@@ -6,7 +6,6 @@ export const useDataFetch = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  // Runs when component renders
   useEffect(() => {
     const handleData = async () => {
       setError(false);
