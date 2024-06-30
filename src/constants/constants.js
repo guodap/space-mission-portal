@@ -2,7 +2,7 @@
 export const API_URL = "https://api.spacexdata.com/v4/launches";
 
 // LAUNCH DATA PAGE LABELS
-export const HEADER = "SpaceX Launches";
+export const HEADER = "SpaceX Launches 🚀";
 export const SEARCH_PLACEHOLDER = "Search by Name";
 export const SEARCH_ARIA_LABEL = "Search for SpaceX Launches by Name";
 export const SORT_BY_DATE_LABEL = "Sort by Date";
