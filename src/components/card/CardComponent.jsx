@@ -8,7 +8,6 @@ import IconButton from "@mui/material/IconButton";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { useMediaQuery } from "@mui/material";
 import convertTimestampToDate from "../../utils/formatDate";
-import spaceXLogo from "../../assets/spaceXLogo.png";
 
 //NOTE - joy is beta release. Find alternative?
 
@@ -56,7 +55,7 @@ const CardComponent = ({
             left: "auto",
             right: "auto",
           }}
-          image={imagePath || spaceXLogo}
+          image={imagePath}
         />
         <Grid sx={{ width: "200px" }}>
           <Typography gutterBottom variant="subtitle1" component="div">

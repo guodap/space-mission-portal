@@ -9,15 +9,17 @@ import { LoadingSkeleton } from "./Skeleton";
 import CardGallery from "./card/CardGallery";
 import { SearchBox } from "./SearchBox";
 
-import { useData } from "../hooks/useData";
+import { useFetchData } from "../hooks/useFetchData";
 import { usePagination } from "../hooks/usePagination";
 
 import "./LaunchDataPage.css";
 import { useDataSort } from "../hooks/useDataSort";
+import { useSearch } from "../hooks/useSearch";
 
 const LaunchDataPage = () => {
-  const { data, loading, error, searchByName } = useData();
-  const { sortedData, sortOrder, toggleSortOrder } = useDataSort(data);
+  const { data, loading, error } = useFetchData();
+  const { searchData, searchByName } = useSearch(data);
+  const { sortedData, sortOrder, toggleSortOrder } = useDataSort(searchData);
   const { paginatedData, totalPages, currentPage, setCurrentPage } =
     usePagination(sortedData);
 
@@ -36,10 +38,10 @@ const LaunchDataPage = () => {
     [searchByName, setCurrentPage]
   );
 
-  const foundData = !loading && !error && paginatedData && paginatedData.length;
-
   if (loading) return <LoadingSkeleton />;
   if (error) return <Error />;
+
+  const foundData = !loading && !error && paginatedData && paginatedData.length;
 
   return (
     <Grid container sx={{ flexDirection: "column", width: "100%" }}>
@@ -96,7 +98,7 @@ const LaunchDataPage = () => {
         ) : null}
       </Grid>
     </Grid>
-  );
+  ); //add error boundary to debug better
 };
 
 export default LaunchDataPage;

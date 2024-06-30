@@ -1,40 +1,26 @@
 /**
  * Sorts an array of objects by a timestamp property.
  * @param {Array} data - The array of objects to sort.
- * @param {string} order - The order to sort by ("ascending" or "descending").
+ * @param {string} order - The order to sort by ("ascending" or "descending"). By default, data is sorted in descending order to show the most recent data.
  * @returns {Array} - The sorted array.
  */
 export const sortByTimestamp = (data = [], order = "descending") => {
-  if (!Array.isArray(data) || data.length === 0) return [];
+  if (!Array.isArray(data)) return [];
 
-  // Validate the order parameter
-  const validOrder = order === "ascending" ? "ascending" : "descending";
-
-  // Helper function to parse and validate dates
+  // Parse and validate dates
   const parseDate = (dateString) => {
     const date = new Date(dateString);
-    if (isNaN(date)) return null;
-    return date;
+    return isNaN(date) ? null : date;
   };
 
-  // Clone the array to avoid mutating the original
-  const dataClone = [...data];
+  // Sort the array based on parsed dates
+  return [...data].sort((a, b) => {
+    const dateA = parseDate(a.date);
+    const dateB = parseDate(b.date);
 
-  // Sort the cloned array
-  try {
-    const sorted = dataClone.sort((a, b) => {
-      console.log(a, b);
-      const dateA = parseDate(a.date);
-      const dateB = parseDate(b.date);
+    // Treat invalid dates as equal
+    if (!dateA || !dateB) return 0;
 
-      if (!dateA || !dateB) return 0; // Treat invalid dates as equal for sorting purposes
-
-      if (validOrder === "ascending") return dateA - dateB;
-      return dateB - dateA;
-    });
-
-    return sorted;
-  } catch {
-    return [];
-  }
+    return order === "ascending" ? dateA - dateB : dateB - dateA;
+  });
 };

@@ -1,10 +1,8 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { getFormattedLaunchData } from "../utils/getData";
-import { filterItemsByName } from "../utils/filterData";
 
-export const useData = () => {
+export const useFetchData = () => {
   const [data, setData] = useState(null);
-  const [searchData, setSearchData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -24,12 +22,5 @@ export const useData = () => {
     handleData();
   }, []);
 
-  const searchByName = useCallback(
-    (input) => {
-      setSearchData(input ? filterItemsByName(data, input) : null);
-    },
-    [data]
-  );
-
-  return { data: searchData || data, loading, error, searchByName };
+  return { data, loading, error };
 };
