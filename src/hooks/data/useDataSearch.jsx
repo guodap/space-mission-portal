@@ -11,6 +11,7 @@ export const useDataSearch = (initialData) => {
 
   useMemo(() => {
     if (!searchInput.trim()) setSearchData(initialData); // Reset searchData to initialData when input is empty
+
     setSearchData(filterItemsByName(initialData, searchInput)); // Perform search only when there's input
   }, [initialData, searchInput]);
 

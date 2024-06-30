@@ -15,15 +15,13 @@ export const useData = () => {
   const { searchData, searchByName } = useDataSearch(sortedData);
 
   //Paginate
-  const { paginatedData, totalPages, currentPage, setCurrentPage } =
-    useDataPagination(searchData);
-
-  const handlePageChange = useCallback(
-    (event, page) => {
-      setCurrentPage(page);
-    },
-    [setCurrentPage]
-  );
+  const {
+    paginatedData,
+    totalPages,
+    currentPage,
+    setCurrentPage,
+    handlePageChange,
+  } = useDataPagination(searchData);
 
   const handleSearchInput = useCallback(
     (input) => {

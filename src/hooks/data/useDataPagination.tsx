@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { ITEMS_PER_PAGE } from "../../constants/constants";
 
 export const useDataPagination = (data) => {
@@ -18,10 +18,18 @@ export const useDataPagination = (data) => {
 
   const totalPages = Math.ceil((data ? data.length : 0) / ITEMS_PER_PAGE);
 
+  const handlePageChange = useCallback(
+    (event, page) => {
+      setCurrentPage(page);
+    },
+    [setCurrentPage]
+  );
+
   return {
     paginatedData,
     totalPages,
     currentPage,
     setCurrentPage,
+    handlePageChange,
   };
 };
