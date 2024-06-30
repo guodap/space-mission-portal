@@ -11,8 +11,6 @@ import { useMediaQuery } from "@mui/material";
 
 import convertTimestampToDate from "../../utils/formatDate";
 
-//NOTE - joy is beta release. Find alternative?
-
 const CardComponent = ({
   name,
   description,

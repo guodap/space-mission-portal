@@ -6,14 +6,15 @@ export const useDataPagination = (data) => {
   const [paginatedData, setPaginatedData] = useState([]);
 
   useEffect(() => {
-    if (data) {
-      setPaginatedData(
-        data.slice(
-          (currentPage - 1) * ITEMS_PER_PAGE,
-          currentPage * ITEMS_PER_PAGE
-        )
-      );
-    }
+    // Skip first mount and only run when data is fetched
+    if (!data) return;
+
+    setPaginatedData(
+      data.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+      )
+    );
   }, [data, currentPage]);
 
   const totalPages = Math.ceil((data ? data.length : 0) / ITEMS_PER_PAGE);

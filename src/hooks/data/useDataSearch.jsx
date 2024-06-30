@@ -10,6 +10,9 @@ export const useDataSearch = (initialData) => {
   }, []);
 
   useMemo(() => {
+    // Skip first mount and only run when data is fetched
+    if (!initialData) return;
+
     if (!searchInput.trim()) setSearchData(initialData); // Reset searchData to initialData when input is empty
 
     setSearchData(filterItemsByName(initialData, searchInput)); // Perform search only when there's input

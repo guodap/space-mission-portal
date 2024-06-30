@@ -1,12 +1,12 @@
 import { Grid, Button as MaterialButton } from "@mui/material";
-import ArrowUpwardSharpIcon from "@mui/icons-material/ArrowUpwardSharp";
 import ArrowDownwardSharpIcon from "@mui/icons-material/ArrowDownwardSharp";
+import ArrowUpwardSharpIcon from "@mui/icons-material/ArrowUpwardSharp";
 import Pagination from "@mui/material/Pagination";
 
 import { Error } from "./Error";
+import { SearchBox } from "./SearchBox";
 import { LoadingSkeleton } from "./Skeleton";
 import CardGallery from "./card/CardGallery";
-import { SearchBox } from "./SearchBox";
 
 import { useData } from "../hooks/data/useData";
 
