@@ -9,12 +9,12 @@ export const useDataPagination = (data) => {
     // Skip first mount and only set state when data is fetched
     if (!data) return;
 
-    setPaginatedData(
-      data.slice(
-        (currentPage - 1) * ITEMS_PER_PAGE,
-        currentPage * ITEMS_PER_PAGE
-      )
+    const slicedData = data.slice(
+      (currentPage - 1) * ITEMS_PER_PAGE,
+      currentPage * ITEMS_PER_PAGE
     );
+
+    setPaginatedData(slicedData);
   }, [data, currentPage]);
 
   const totalPages = Math.ceil((data ? data.length : 0) / ITEMS_PER_PAGE);
