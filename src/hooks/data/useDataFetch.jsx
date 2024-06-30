@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { getFormattedLaunchData } from "../utils/getData";
+import { getFormattedLaunchData } from "../../utils/getData";
 
-export const useFetchData = () => {
+export const useDataFetch = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  console.log("HERE");
 
   useEffect(() => {
     const handleData = async () => {

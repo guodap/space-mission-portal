@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { Grid, Button as MaterialButton } from "@mui/material";
 import ArrowUpwardSharpIcon from "@mui/icons-material/ArrowUpwardSharp";
 import ArrowDownwardSharpIcon from "@mui/icons-material/ArrowDownwardSharp";
@@ -9,39 +8,25 @@ import { LoadingSkeleton } from "./Skeleton";
 import CardGallery from "./card/CardGallery";
 import { SearchBox } from "./SearchBox";
 
-import { useFetchData } from "../hooks/useFetchData";
-import { usePagination } from "../hooks/usePagination";
+import { useData } from "../hooks/data/useData";
 
 import "./LaunchDataPage.css";
-import { useDataSort } from "../hooks/useDataSort";
-import { useSearch } from "../hooks/useSearch";
 
 const LaunchDataPage = () => {
-  const { data, loading, error } = useFetchData();
-  const { searchData, searchByName } = useSearch(data);
-  const { sortedData, sortOrder, toggleSortOrder } = useDataSort(searchData);
-  const { paginatedData, totalPages, currentPage, setCurrentPage } =
-    usePagination(sortedData);
-
-  const handlePageChange = useCallback(
-    (event, page) => {
-      setCurrentPage(page);
-    },
-    [setCurrentPage]
-  );
-
-  const handleSearchInput = useCallback(
-    (input) => {
-      searchByName(input);
-      setCurrentPage(1);
-    },
-    [searchByName, setCurrentPage]
-  );
+  const {
+    paginatedData,
+    loading,
+    error,
+    sortOrder,
+    toggleSortOrder,
+    currentPage,
+    totalPages,
+    handlePageChange,
+    handleSearchInput,
+  } = useData();
 
   if (loading) return <LoadingSkeleton />;
   if (error) return <Error />;
-
-  const foundData = !loading && !error && paginatedData && paginatedData.length;
 
   return (
     <Grid container sx={{ flexDirection: "column", width: "100%" }}>
@@ -56,7 +41,7 @@ const LaunchDataPage = () => {
             placeholder="Search by Name"
           />
         </Grid>
-        {foundData ? (
+        {paginatedData?.length ? (
           <Grid>
             <MaterialButton
               variant="text"
@@ -79,12 +64,12 @@ const LaunchDataPage = () => {
       </Grid>
 
       <Grid>
-        {foundData ? (
+        {paginatedData?.length ? (
           <CardGallery data={paginatedData} />
         ) : (
           <div>No launch data matched your input</div>
         )}
-        {foundData ? (
+        {paginatedData?.length ? (
           <Pagination
             count={totalPages}
             page={currentPage}
@@ -98,7 +83,7 @@ const LaunchDataPage = () => {
         ) : null}
       </Grid>
     </Grid>
-  ); //add error boundary to debug better
+  );
 };
 
 export default LaunchDataPage;

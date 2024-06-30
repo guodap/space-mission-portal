@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { ITEMS_PER_PAGE } from "../constants/constants";
+import { ITEMS_PER_PAGE } from "../../constants/constants";
 
-export const usePagination = (data) => {
+export const useDataPagination = (data) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [paginatedData, setPaginatedData] = useState([]);
 

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/joy/Card";
@@ -7,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { useMediaQuery } from "@mui/material";
+
 import convertTimestampToDate from "../../utils/formatDate";
 
 //NOTE - joy is beta release. Find alternative?

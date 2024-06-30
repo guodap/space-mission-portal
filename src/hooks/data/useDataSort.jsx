@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { sortByTimestamp } from "../utils/sortData";
+import { sortByTimestamp } from "../../utils/sortData";
 
 export const useDataSort = (data) => {
   const [sortOrder, setSortOrder] = useState("descending");
