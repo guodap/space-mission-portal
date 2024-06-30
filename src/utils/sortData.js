@@ -1,15 +1,28 @@
-export const sortByTimestamp = (data, order = "descending") => {
-  if (!data || !data.length) return;
-  try {
-    const sorted = data?.sort((a, b) => {
-      const dateA = new Date(a.date_local);
-      const dateB = new Date(b.date_local);
-      if (order === "ascending") return dateA - dateB;
-      return dateB - dateA;
-    });
-    return sorted;
-  } catch (e) {
-    console.log(`An error occurred while sorting data in ${order} order: ${e}`);
-    return;
-  }
+import { DEFAULT_SORT_ORDER } from "../constants/constants";
+
+/**
+ * Sorts an array of objects by a timestamp property.
+ * @param {Array} data - The array of objects to sort.
+ * @param {string} order - The order to sort by ("ascending" or "descending"). By default, data is sorted in descending order to show the most recent data.
+ * @returns {Array} - The sorted array.
+ */
+export const sortByTimestamp = (data = [], order = DEFAULT_SORT_ORDER) => {
+  if (!Array.isArray(data)) return [];
+
+  // Parse and validate dates
+  const parseDate = (dateString) => {
+    const date = new Date(dateString);
+    return isNaN(date) ? null : date;
+  };
+
+  // Sort based on parsed dates
+  return [...data].sort((a, b) => {
+    const dateA = parseDate(a.date);
+    const dateB = parseDate(b.date);
+
+    // Treat invalid dates as equal
+    if (!dateA || !dateB) return 0;
+
+    return order === "ascending" ? dateA - dateB : dateB - dateA;
+  });
 };

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/joy/Card";
@@ -8,12 +9,11 @@ import IconButton from "@mui/material/IconButton";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { useMediaQuery } from "@mui/material";
 
+import convertTimestampToDate from "../../utils/formatDate";
+import { SUCCESS_LABEL } from "../../constants/constants";
 import spaceXLogo from "../../assets/spaceXLogo.png";
 
-//NOTE - joy is beta release. Find alternative?
-
 const CardComponent = ({
-  id,
   name,
   description,
   date,
@@ -25,7 +25,6 @@ const CardComponent = ({
 
   return (
     <Grid
-      key={id}
       container
       spacing={0}
       alignItems="center"
@@ -58,70 +57,77 @@ const CardComponent = ({
             left: "auto",
             right: "auto",
           }}
-          image={imagePath ? imagePath : spaceXLogo}
+          image={imagePath || spaceXLogo}
         />
         <Grid sx={{ width: "200px" }}>
           <Typography gutterBottom variant="subtitle1" component="div">
-            {date}
+            {convertTimestampToDate(date)}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
             {name}
           </Typography>
-          <Chip
-            color={status === "Success" ? "success" : "warning"}
-            size="sm"
+          {status && (
+            <Chip
+              color={status === SUCCESS_LABEL ? "success" : "warning"}
+              size="sm"
+              sx={{
+                borderRadius: "sm",
+                py: 0.25,
+                px: 0.5,
+                marginBottom: "8px",
+              }}
+            >
+              {status}
+            </Chip>
+          )}
+        </Grid>
+        {
+          <Typography
+            variant="body2"
+            color="text.secondary"
             sx={{
-              borderRadius: "sm",
-              py: 0.25,
-              px: 0.5,
-              marginBottom: "8px",
+              width: isSmallScreen ? "100%" : "50%",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: "10",
             }}
           >
-            {status}
-          </Chip>
-        </Grid>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{
-            width: isSmallScreen ? "100%" : "50%",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            display: "-webkit-box",
-            WebkitBoxOrient: "vertical",
-            // WebkitLineClamp: "10", // Adjust the number of lines to display
-          }}
-        >
-          {description}
-        </Typography>
-        <IconButton
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="YouTube link"
-          sx={{
-            color: "red",
-            fontSize: "40px",
-            alignItems: "center",
-            marginLeft: "5%",
-            marginRight: "5%",
-          }}
-        >
-          <YouTubeIcon fontSize="inherit" />
-        </IconButton>
+            {description}
+          </Typography>
+        }
+        {link && (
+          <IconButton
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube link"
+            sx={{
+              color: "red",
+              fontSize: "40px",
+              alignItems: "center",
+              marginLeft: "5%",
+              marginRight: "5%",
+            }}
+          >
+            <YouTubeIcon fontSize="inherit" />
+          </IconButton>
+        )}
       </Card>
     </Grid>
   );
 };
 
-export default CardComponent;
-
 CardComponent.propTypes = {
-  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   date: PropTypes.string.isRequired,
-  imagePath: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
+  imagePath: PropTypes.string,
+  link: PropTypes.string,
   status: PropTypes.string.isRequired,
 };
+
+export default CardComponent;
+
+//NOTE: Joy is Beta release.

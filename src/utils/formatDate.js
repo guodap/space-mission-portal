@@ -1,15 +1,18 @@
 import dayjs from "dayjs";
+import { DEFAULT_DATE_FORMAT } from "../constants/constants";
 
-const DEFAULT_DATE_FORMAT = "D MMMM, YYYY";
+/**
+ * Converts a timestamp to a date of "D MMMM, YYYY" format.
+ * @param {string} timestamp - The timestamp to convert. A string representing a date or time (e.g., "2024-06-28", "2024-06-28T12:00:00").
+ * @return {string} The date in "D MMMM, YYYY" format.
+ */
+const convertTimestampToDate = (timestamp) => {
+  if (!timestamp || typeof timestamp !== "string") return "";
 
-export const timestampToDate = (timestamp, format = DEFAULT_DATE_FORMAT) => {
-  try {
-    const date = dayjs(timestamp);
-    return date.format(format);
-  } catch (e) {
-    console.log(
-      `An error occurred while converting timestamp ${timestamp} to date of format ${format}: ${e}`
-    );
-    return null;
-  }
+  const parsedTimestamp = dayjs(timestamp);
+  if (!parsedTimestamp.isValid()) return "";
+
+  return parsedTimestamp.format(DEFAULT_DATE_FORMAT);
 };
+
+export default convertTimestampToDate;

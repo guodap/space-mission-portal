@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 export const SearchBox = ({ placeholder, ariaLabel, handlerFunction }) => {
   const handleChange = (event) => {
     handlerFunction(event.target.value);
@@ -13,11 +14,11 @@ export const SearchBox = ({ placeholder, ariaLabel, handlerFunction }) => {
       className="search-input"
       style={{
         backgroundColor: "white",
-        borderBlockStyle: "solid",
-        borderColor: "grey",
+        border: "1px solid grey",
         borderRadius: "20px",
-        borderBlockWidth: "100%",
         height: "50px",
+        paddingLeft: "10px",
+        boxSizing: "border-box",
       }}
     />
   );
@@ -26,5 +27,5 @@ export const SearchBox = ({ placeholder, ariaLabel, handlerFunction }) => {
 SearchBox.propTypes = {
   placeholder: PropTypes.string.isRequired,
   ariaLabel: PropTypes.string.isRequired,
-  handlerFunction: PropTypes.any.isRequired,
+  handlerFunction: PropTypes.func.isRequired,
 };
