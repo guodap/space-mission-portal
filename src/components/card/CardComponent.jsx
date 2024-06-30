@@ -128,4 +128,4 @@ CardComponent.propTypes = {
 
 export default CardComponent;
 
-//NOTE: Joy is Beta release. Find alternative?
+//NOTE: Joy is Beta release.

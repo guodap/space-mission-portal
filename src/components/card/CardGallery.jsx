@@ -4,16 +4,8 @@ import CardComponent from "./CardComponent";
 const CardGallery = ({ data }) => {
   return (
     <>
-      {data.map(({ id, name, description, date, imagePath, link, status }) => (
-        <CardComponent
-          key={id}
-          name={name}
-          description={description}
-          date={date}
-          imagePath={imagePath}
-          link={link}
-          status={status}
-        />
+      {data.map((item) => (
+        <CardComponent key={item.id} {...item} />
       ))}
     </>
   );

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 export const SearchBox = ({ placeholder, ariaLabel, handlerFunction }) => {
   const handleChange = (event) => {
     handlerFunction(event.target.value);

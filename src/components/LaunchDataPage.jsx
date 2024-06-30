@@ -36,58 +36,49 @@ const LaunchDataPage = () => {
   return (
     <Grid container sx={{ flexDirection: "column", width: "100%" }}>
       <Grid>
-        <Grid>
-          <h1>{HEADER}</h1>
-        </Grid>
-        <Grid>
-          <SearchBox
-            ariaLabel="Search for SpaceX Launches by name"
-            handlerFunction={handleSearchInput}
-            placeholder="Search by Name"
-          />
-        </Grid>
-        {paginatedData?.length ? (
-          <Grid>
-            <MaterialButton
-              variant="text"
-              sx={{
-                color: "black",
-                float: "right",
-                margin: "10px 20px 10px 0",
-              }}
-              onClick={toggleSortOrder}
-            >
-              {sortOrder === "ascending" ? (
-                <ArrowUpwardSharpIcon />
-              ) : (
-                <ArrowDownwardSharpIcon />
-              )}
-              <span style={{ textTransform: "none" }}>
-                {SORT_BY_DATE_LABEL}
-              </span>
-            </MaterialButton>
-          </Grid>
-        ) : null}
+        <h1>{HEADER}</h1>
+        <SearchBox
+          ariaLabel="Search for SpaceX Launches by name"
+          handlerFunction={handleSearchInput}
+          placeholder="Search by Name"
+        />
       </Grid>
 
+      <Grid>
+        {paginatedData?.length && (
+          <MaterialButton
+            variant="text"
+            sx={{
+              color: "black",
+              float: "right",
+              margin: "10px 20px 10px 0",
+            }}
+            onClick={toggleSortOrder}
+          >
+            {sortOrder === "ascending" ? (
+              <ArrowUpwardSharpIcon />
+            ) : (
+              <ArrowDownwardSharpIcon />
+            )}
+            <span style={{ textTransform: "none" }}>{SORT_BY_DATE_LABEL}</span>
+          </MaterialButton>
+        )}
+      </Grid>
       <Grid>
         {paginatedData?.length ? (
           <CardGallery data={paginatedData} />
         ) : (
           <div>{NO_LAUNCH_DATA_MESSAGE}</div>
         )}
-        {paginatedData?.length ? (
+        {paginatedData?.length && (
           <Pagination
             count={totalPages}
             page={currentPage}
             size="large"
             onChange={handlePageChange}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
+            sx={{ display: "flex", justifyContent: "center" }}
           />
-        ) : null}
+        )}
       </Grid>
     </Grid>
   );

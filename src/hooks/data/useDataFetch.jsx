@@ -7,7 +7,7 @@ export const useDataFetch = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const handleData = async () => {
+    const fetchData = async () => {
       setError(false);
       setLoading(true);
       try {
@@ -19,7 +19,9 @@ export const useDataFetch = () => {
         setLoading(false);
       }
     };
-    handleData();
+
+    fetchData();
   }, []);
+
   return { data, loading, error };
 };

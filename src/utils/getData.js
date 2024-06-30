@@ -1,14 +1,10 @@
 import axios from "axios";
 import { API_URL } from "../constants/constants";
 import spaceXLogo from "../assets/spaceXLogo.png";
-
 /**
  * Retrieves, formats required launch data from the provided URL and adds fallback values.
- *
- * @param {string} url - The URL of the API endpoint to fetch launch data from.
- * @return {Promise <Array<object>>} An array of formatted launch data objects.
+ * @return {Promise<Array<object>>} An array of formatted launch data objects.
  */
-
 export const getFormattedLaunchData = async () => {
   const launchData = await getData(API_URL);
 
@@ -40,7 +36,6 @@ export const getFormattedLaunchData = async () => {
  * @returns {Promise<Array<object>>} - A promise that resolves to the data fetched from the API endpoint or an empty array if the request fails.
  * @throws {Error} - Throws an error if the request fails.
  */
-
 const getData = async (url) => {
   if (typeof url !== "string" || !url.trim()) return [];
 

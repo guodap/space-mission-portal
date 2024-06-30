@@ -3,7 +3,9 @@ import LaunchDataPage from "./components/LaunchDataPage";
 import "./App.css";
 
 const App = () => {
-  return <LaunchDataPage />; //add error boundary to debug better
+  return <LaunchDataPage />;
 };
 
 export default App;
+
+//TO DO: Add error boundary to debug better
