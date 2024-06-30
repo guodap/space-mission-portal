@@ -5,18 +5,18 @@ import { useDataPagination } from "./useDataPagination";
 import { useDataSort } from "./useDataSort";
 
 export const useData = () => {
-  //Fetch
+  //Fetch data
   const { data, loading, error } = useDataFetch();
 
-  //Search
-  const { searchData, searchByName } = useDataSearch(data);
+  //Sort fetched data
+  const { sortedData, sortOrder, toggleSortOrder } = useDataSort(data);
 
-  //Sort
-  const { sortedData, sortOrder, toggleSortOrder } = useDataSort(searchData);
+  //Search
+  const { searchData, searchByName } = useDataSearch(sortedData);
 
   //Paginate
   const { paginatedData, totalPages, currentPage, setCurrentPage } =
-    useDataPagination(sortedData);
+    useDataPagination(searchData);
 
   const handlePageChange = useCallback(
     (event, page) => {

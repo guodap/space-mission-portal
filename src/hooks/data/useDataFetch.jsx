@@ -6,8 +6,7 @@ export const useDataFetch = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  console.log("HERE");
-
+  // Runs when component renders
   useEffect(() => {
     const handleData = async () => {
       setError(false);
@@ -23,6 +22,5 @@ export const useDataFetch = () => {
     };
     handleData();
   }, []);
-
   return { data, loading, error };
 };
