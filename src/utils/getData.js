@@ -13,7 +13,7 @@ import {
 export const getFormattedLaunchData = async () => {
   const launchData = await getData(API_URL);
 
-  const filteredLaunchData = launchData.map(
+  const filteredLaunchData = launchData?.map(
     ({
       id = "",
       name = "",
