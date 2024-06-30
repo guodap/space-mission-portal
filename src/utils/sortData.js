@@ -1,10 +1,12 @@
+import { DEFAULT_SORT_ORDER } from "../constants/constants";
+
 /**
  * Sorts an array of objects by a timestamp property.
  * @param {Array} data - The array of objects to sort.
  * @param {string} order - The order to sort by ("ascending" or "descending"). By default, data is sorted in descending order to show the most recent data.
  * @returns {Array} - The sorted array.
  */
-export const sortByTimestamp = (data = [], order = "descending") => {
+export const sortByTimestamp = (data = [], order = DEFAULT_SORT_ORDER) => {
   if (!Array.isArray(data)) return [];
 
   // Parse and validate dates

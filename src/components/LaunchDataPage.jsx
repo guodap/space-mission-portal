@@ -13,6 +13,9 @@ import {
   NO_LAUNCH_DATA_MESSAGE,
   SORT_BY_DATE_LABEL,
   HEADER,
+  SEARCH_PLACEHOLDER,
+  SEARCH_ARIA_LABEL,
+  DEFAULT_SORT_ORDER,
 } from "../constants/constants";
 
 import "./LaunchDataPage.css";
@@ -38,12 +41,11 @@ const LaunchDataPage = () => {
       <Grid>
         <h1>{HEADER}</h1>
         <SearchBox
-          ariaLabel="Search for SpaceX Launches by name"
+          ariaLabel={SEARCH_ARIA_LABEL}
           handlerFunction={handleSearchInput}
-          placeholder="Search by Name"
+          placeholder={SEARCH_PLACEHOLDER}
         />
       </Grid>
-
       <Grid>
         {paginatedData?.length ? (
           <MaterialButton
@@ -55,10 +57,10 @@ const LaunchDataPage = () => {
             }}
             onClick={toggleSortOrder}
           >
-            {sortOrder === "ascending" ? (
-              <ArrowUpwardSharpIcon />
-            ) : (
+            {sortOrder === DEFAULT_SORT_ORDER ? (
               <ArrowDownwardSharpIcon />
+            ) : (
+              <ArrowUpwardSharpIcon />
             )}
             <span style={{ textTransform: "none" }}>{SORT_BY_DATE_LABEL}</span>
           </MaterialButton>

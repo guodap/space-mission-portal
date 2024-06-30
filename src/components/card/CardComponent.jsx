@@ -10,6 +10,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import { useMediaQuery } from "@mui/material";
 
 import convertTimestampToDate from "../../utils/formatDate";
+import { SUCCESS_LABEL } from "../../constants/constants";
 
 const CardComponent = ({
   name,
@@ -66,7 +67,7 @@ const CardComponent = ({
           </Typography>
           {status && (
             <Chip
-              color={status === "Success" ? "success" : "warning"}
+              color={status === SUCCESS_LABEL ? "success" : "warning"}
               size="sm"
               sx={{
                 borderRadius: "sm",

@@ -1,5 +1,11 @@
 import axios from "axios";
-import { API_URL } from "../constants/constants";
+
+import {
+  API_URL,
+  SUCCESS_LABEL,
+  FAILURE_LABEL,
+  ERROR_MESSAGE_FETCH_FAILED,
+} from "../constants/constants";
 import spaceXLogo from "../assets/spaceXLogo.png";
 /**
  * Retrieves, formats required launch data from the provided URL and adds fallback values.
@@ -23,7 +29,7 @@ export const getFormattedLaunchData = async () => {
       date: date_local,
       imagePath: links?.patch?.small || spaceXLogo,
       link: links?.webcast,
-      status: success ? "Success" : "Failure",
+      status: success ? SUCCESS_LABEL : FAILURE_LABEL,
     })
   );
 
@@ -43,6 +49,6 @@ const getData = async (url) => {
     const { data } = await axios.get(url);
     return data;
   } catch (e) {
-    throw new Error(`Failed to fetch data from ${url}: ${e}`);
+    throw new Error(ERROR_MESSAGE_FETCH_FAILED(url, e));
   }
 };
