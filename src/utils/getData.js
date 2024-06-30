@@ -6,7 +6,7 @@ import spaceXLogo from "../assets/spaceXLogo.png";
  * Retrieves, formats required launch data from the provided URL and adds fallback values.
  *
  * @param {string} url - The URL of the API endpoint to fetch launch data from.
- * @return {Array<object>} An array of formatted launch data objects.
+ * @return {Promise <Array<object>>} An array of formatted launch data objects.
  */
 
 export const getFormattedLaunchData = async () => {

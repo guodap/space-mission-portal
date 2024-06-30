@@ -1,19 +1,18 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { filterItemsByName } from "../../utils/filterData";
 
-export const useDataSearch = (data) => {
-  const [searchData, setSearchData] = useState(data);
+export const useDataSearch = (initialData) => {
+  const [searchInput, setSearchInput] = useState("");
+  const [searchData, setSearchData] = useState(initialData);
 
-  const searchByName = useCallback(
-    (input) => {
-      setSearchData(input ? filterItemsByName(data, input) : data);
-    },
-    [data]
-  );
+  const searchByName = useCallback((input) => {
+    setSearchInput(input);
+  }, []);
 
-  useEffect(() => {
-    setSearchData(data);
-  }, [data]);
+  useMemo(() => {
+    if (!searchInput.trim()) setSearchData(initialData); // Reset searchData to initialData when input is empty
+    setSearchData(filterItemsByName(initialData, searchInput)); // Perform search only when there's input
+  }, [initialData, searchInput]);
 
   return { searchData, searchByName };
 };
