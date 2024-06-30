@@ -45,7 +45,7 @@ const LaunchDataPage = () => {
       </Grid>
 
       <Grid>
-        {paginatedData?.length && (
+        {paginatedData?.length ? (
           <MaterialButton
             variant="text"
             sx={{
@@ -62,7 +62,7 @@ const LaunchDataPage = () => {
             )}
             <span style={{ textTransform: "none" }}>{SORT_BY_DATE_LABEL}</span>
           </MaterialButton>
-        )}
+        ) : null}
       </Grid>
       <Grid>
         {paginatedData?.length ? (
@@ -70,7 +70,7 @@ const LaunchDataPage = () => {
         ) : (
           <div>{NO_LAUNCH_DATA_MESSAGE}</div>
         )}
-        {paginatedData?.length && (
+        {paginatedData?.length ? (
           <Pagination
             count={totalPages}
             page={currentPage}
@@ -78,7 +78,7 @@ const LaunchDataPage = () => {
             onChange={handlePageChange}
             sx={{ display: "flex", justifyContent: "center" }}
           />
-        )}
+        ) : null}
       </Grid>
     </Grid>
   );
