@@ -6,7 +6,6 @@ import {
   FAILURE_LABEL,
   ERROR_MESSAGE_FETCH_FAILED,
 } from "../constants/constants";
-import spaceXLogo from "../assets/spaceXLogo.png";
 /**
  * Retrieves, formats required launch data from the provided URL and adds fallback values.
  * @return {Promise<Array<object>>} An array of formatted launch data objects.
@@ -27,7 +26,7 @@ export const getFormattedLaunchData = async () => {
       name,
       description: details,
       date: date_local,
-      imagePath: links?.patch?.small || spaceXLogo,
+      imagePath: links?.patch?.small,
       link: links?.webcast,
       status: success ? SUCCESS_LABEL : FAILURE_LABEL,
     })

@@ -7,11 +7,10 @@
 export const filterItemsByName = (items = [], searchTerm = "") => {
   if (!validateFilterParams(items, searchTerm)) return [];
 
-  // Normalize the search term by trimming whitespace and converting to lowercase
+  // Normalize - remove whitespace and convert to lowercase
   const normalizedSearchTerm = searchTerm.trim().toLowerCase();
   if (!normalizedSearchTerm) return items;
 
-  // Filter items based on the normalized search term matching the name property
   return items.filter(({ name }) => {
     if (typeof name !== "string") return false;
     return name.toLowerCase().includes(normalizedSearchTerm);

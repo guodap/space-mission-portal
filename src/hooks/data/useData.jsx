@@ -4,6 +4,9 @@ import { useDataSearch } from "./useDataSearch";
 import { useDataPagination } from "./useDataPagination";
 import { useDataSort } from "./useDataSort";
 
+/**
+ * Custom hook that combines fetching, sorting, filtering, and paginating of data.
+ */
 export const useData = () => {
   //Fetch data
   const { data, loading, error } = useDataFetch();

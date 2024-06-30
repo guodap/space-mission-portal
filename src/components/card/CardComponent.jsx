@@ -11,6 +11,7 @@ import { useMediaQuery } from "@mui/material";
 
 import convertTimestampToDate from "../../utils/formatDate";
 import { SUCCESS_LABEL } from "../../constants/constants";
+import spaceXLogo from "../../assets/spaceXLogo.png";
 
 const CardComponent = ({
   name,
@@ -56,7 +57,7 @@ const CardComponent = ({
             left: "auto",
             right: "auto",
           }}
-          image={imagePath}
+          image={imagePath || spaceXLogo}
         />
         <Grid sx={{ width: "200px" }}>
           <Typography gutterBottom variant="subtitle1" component="div">

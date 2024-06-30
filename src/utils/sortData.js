@@ -15,7 +15,7 @@ export const sortByTimestamp = (data = [], order = DEFAULT_SORT_ORDER) => {
     return isNaN(date) ? null : date;
   };
 
-  // Sort the array based on parsed dates
+  // Sort based on parsed dates
   return [...data].sort((a, b) => {
     const dateA = parseDate(a.date);
     const dateB = parseDate(b.date);

@@ -14,11 +14,11 @@ export const SearchBox = ({ placeholder, ariaLabel, handlerFunction }) => {
       className="search-input"
       style={{
         backgroundColor: "white",
-        borderStyle: "solid",
-        borderColor: "grey",
+        border: "1px solid grey",
         borderRadius: "20px",
-        borderWidth: "1px",
         height: "50px",
+        paddingLeft: "10px",
+        boxSizing: "border-box",
       }}
     />
   );
