@@ -41,7 +41,7 @@ npm test
 
 ## Features and Design Decisions
 
-### Display Launches
+### SpaceX Launch Gallery
 
 - **Card Layout**: Each launch is displayed in a responsive card format.
   - **Reasoning**: The content has an image, long description, and link, which seemed best suited for a card as. Cards are a visually appealing way to allow the user to browse and read details about each launch. They also suite the responsive design, suitable for both web and mobile. Timestamp has been changed to date for better readability.
