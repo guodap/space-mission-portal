@@ -17,7 +17,7 @@ CardGallery.propTypes = {
       name: PropTypes.string.isRequired,
       description: PropTypes.string,
       date: PropTypes.string.isRequired,
-      imagePath: PropTypes.string.isRequired,
+      imagePath: PropTypes.string,
       link: PropTypes.string,
       status: PropTypes.string.isRequired,
     })

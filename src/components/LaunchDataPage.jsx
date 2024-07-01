@@ -3,11 +3,6 @@ import ArrowDownwardSharpIcon from "@mui/icons-material/ArrowDownwardSharp";
 import ArrowUpwardSharpIcon from "@mui/icons-material/ArrowUpwardSharp";
 import Pagination from "@mui/material/Pagination";
 
-import { Error } from "./Error";
-import { SearchBox } from "./SearchBox";
-import { LoadingSkeleton } from "./Skeleton";
-import CardGallery from "./card/CardGallery";
-
 import { useData } from "../hooks/data/useData";
 import {
   NO_LAUNCH_DATA_MESSAGE,
@@ -17,6 +12,11 @@ import {
   SEARCH_ARIA_LABEL,
   DEFAULT_SORT_ORDER,
 } from "../constants/constants";
+
+import { Error } from "./Error";
+import { SearchBox } from "./SearchBox";
+import { LoadingSkeleton } from "./Skeleton";
+import CardGallery from "./card/CardGallery";
 
 import "./LaunchDataPage.css";
 

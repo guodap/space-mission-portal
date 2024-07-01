@@ -11,7 +11,7 @@ export const FAILURE_LABEL = "Failure";
 
 // UX STATE MESSAGES
 export const LOADING_MESSAGE = "Loading...";
-export const NO_LAUNCH_DATA_MESSAGE = "No launch data matched your input.";
+export const NO_LAUNCH_DATA_MESSAGE = "No launch data could be found.";
 export const ERROR_MESSAGE =
   "Something went wrong! Please try again later. If the issue persists, contact our Support team.";
 
@@ -22,6 +22,6 @@ export const ITEMS_PER_PAGE = 10;
 export const DEFAULT_DATE_FORMAT = "D MMMM, YYYY";
 export const DEFAULT_SORT_ORDER = "descending";
 
-// FETCH
+// FETCHING
 export const ERROR_MESSAGE_FETCH_FAILED = (url, e) =>
   `Failed to fetch data from ${url}: ${e}`;

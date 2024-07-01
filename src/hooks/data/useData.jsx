@@ -1,11 +1,12 @@
 import { useCallback, useMemo } from "react";
+
 import { useDataFetch } from "./useDataFetch";
 import { useDataSearch } from "./useDataSearch";
 import { useDataPagination } from "./useDataPagination";
 import { useDataSort } from "./useDataSort";
 
 /**
- * Custom hook that combines fetching, sorting, filtering, and paginating of data.
+ * Custom hook that combines fetching, sorting, filtering, and pagination of data.
  */
 export const useData = () => {
   //Fetch data
@@ -29,6 +30,7 @@ export const useData = () => {
   const handleSearchInput = useCallback(
     (input) => {
       searchByName(input);
+      // Reset current page when search input changes as the total number of pages will most likely change
       setCurrentPage(1);
     },
     [searchByName, setCurrentPage]
