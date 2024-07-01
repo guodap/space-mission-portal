@@ -105,16 +105,19 @@ npm test
 
 - **Caching**: Implement caching to reduce network calls as launch data is historic and therefore, very predictable and doesn't change often.
 - **Accessibility**: Ensure the application design and content is accessible to all users e.g. more descriptive semantic data should be added for reading assistants.
-- **User Consideration**: Identify the target users and tailor data presentation, design and functionality choices to their needs. For this, we should understand the user and perform thorough design/UX reviews. We could also conduct beta testing with users and gather feedback.
+- **User Consideration**: Identify the target users and tailor data presentation, design and functionality choices to their needs. For this, we should understand the user and perform thorough design/UX reviews. We could also conduct Beta testing with users and gather feedback.
 
 ## Testing
 
-- **Tests Performed**
-  - Exploratory Testing: Exploratory testing has been conducted to cover most scenarios (happy paths and error cases)
-  - Unit Tests - Utility Functions
-    - Note: Some tests are disabled due to failures and lack of time to fix them.
-- **Future**
-  - Component and Hook Tests: Need to add and fix test configurations to resolve failures.
+**Performed Tests**
+
+- Exploratory Testing: Exploratory testing has been conducted to cover most scenarios (happy paths and error cases)
+- Unit Tests - Utility Functions
+  - Note: Some tests are disabled due to failures and lack of time to fix them.
+
+**Future**
+
+- Component and Hook Tests: Need to add and fix test configurations to resolve failures.
 
 ## Technologies
 
