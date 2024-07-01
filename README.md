@@ -92,7 +92,7 @@ npm test
 
 - **Vulnerability Scan**: A CI/CD process has been set up with a vulnerability check, running `npm audit` and recording the result.
   - **Future**: Use a more sophisticated tool and create automatic PRs with potential fixes that could be approved. Alerts could also be set up.
-  - **Note**: A failed pipeline doesn't currently fail PR merges and deployment, which it certainly should.
+  - **Note**: A failed pipeline doesn't currently fail PR merges and deployment, which it certainly should. Deployment also occurs on e.g. README file changes, which shouldn't be the case
 - **API and User Input Validation and Sanitisation**: JSX has inbuilt sanitisation to prevent Cross Site Scripting (XSS). Data validation is performed in the code before performing operations, but it isn't perfect.
   - **To Do**: Double check that API and user input format and type are validated and that there's no security or unhandled error risks.
 
