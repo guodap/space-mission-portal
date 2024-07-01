@@ -4,6 +4,7 @@ An application that allows users to browse SpaceX launches and learn more about 
 
 - Website: https://space-mission-portal.onrender.com/
 - CI/CD Pipeline: https://github.com/guodap/space-mission-portal/actions (Test, Vulnerability Scan, Lint, Build/Deploy)
+- GH Repo: https://github.com/guodap/space-mission-portal
 
 ![SpaceX Launch](./docs/screenshots/app_screenshot.png)
 
