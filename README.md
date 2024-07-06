@@ -15,13 +15,13 @@ An application that allows users to browse SpaceX launches and learn more about 
    git clone https://github.com/guodap/space-mission-portal
    ```
 
-2. Install dependencies and run the app from the root folder
+2. Install dependencies and run the app (root folder)
 
    ```sh
    npm i && npm start
    ```
 
-3. Open app at the url displayed in the terminal (default: http://localhost:5173)
+3. Open the app at the url displayed in the terminal (default: http://localhost:5173)
 
 ## Build for Production
 
@@ -45,13 +45,14 @@ npm test
 
 **Card Layout**: Each launch is displayed in a responsive card format.
 
-- **Reasoning**: The content has an image, long description, and link, which are best suited for a card. Cards are a visually appealing way to allow the user to browse this type of information. They're also a great choice for responsive design, for both desktop and mobile. Note: Timestamp has been changed to date for better readability.
+- **Reasoning**: The content has an image, long description, and link, which seemed best suited for a card. Cards are a visually appealing way to allow the user to browse this type of information. They're also a great choice for responsive design, for both desktop and mobile. Note: Timestamp has been changed to date for better readability.
 - **Card vs. Table Layout**: A table might be better for displaying detailed and structured data with more fields. Also, if the user needed to analyse and compare the displayed data, a table would be more suitable.
 - **Future**:
   - Clearly label all fields (e.g. Launch Name, Local Date, Mission Status, Launch Details) for better usability.
-  - Extend the application to show more data beyond launches from other available endpoints.
-  - Use an endpoint that fetches more recent data (beyond 2022).
-- **Bug**: The date is being rounded up in the code by one day because the API returns it in local UTC format. Need to raise a GH issue and fix this.
+  - Hide the detailed launch description behind a "Read more" button that opens an overlay.
+  - Extend the application to show more data beyond launches, using other available endpoints from the API.
+  - Use an API/endpoint that fetches more recent data (beyond 2022).
+- **Bug**: The date is being rounded up in the code by one day because the API returns it in local UTC format. Need to investigate further what's expected and if it's a bug, raise a GH issue.
 
 ### Sorting
 
@@ -59,7 +60,7 @@ npm test
 
 - **Reasoning**: Launch data is historic and has therefore been sorted by date, instead of name. Generally, users are interested in the most recent data. Therefore, by default, most recent data is shown first to make the application more relevant and useful.
 
-### Search Functionality
+### Searching
 
 **Searching by Launch Name (on user input)**:
 
@@ -92,7 +93,7 @@ npm test
 
 - **Vulnerability Scan**: A CI/CD process has been set up with a vulnerability check, running `npm audit` and recording the result.
   - **Future**: Use a more sophisticated tool and create automatic PRs with potential fixes that could be approved. Alerts could also be set up.
-  - **Note**: A failed pipeline doesn't currently fail PR merges and deployment, which it certainly should. Deployment also occurs on e.g. README file changes, which shouldn't be the case
+  - **Note**: A failed pipeline doesn't currently fail PR merges and deployment, which it certainly should. Deployment also occurs on e.g. README file changes, which shouldn't be the case.
 - **API and User Input Validation and Sanitisation**: JSX has inbuilt sanitisation to prevent Cross Site Scripting (XSS). Data validation is performed in the code before performing operations, but it isn't perfect.
   - **To Do**: Double check that API and user input format and type are validated and that there's no security or unhandled error risks.
 
@@ -103,7 +104,7 @@ npm test
 
 ## Future Improvements for Performance and UX
 
-- **Caching**: Implement caching to reduce network calls as launch data is historic and therefore, very predictable and doesn't change often.
+- **Caching**: Implement caching to reduce network calls as historic launch data is very predictable and doesn't change often.
 - **Accessibility**: Ensure the application design and content is accessible to all users e.g. more descriptive semantic data should be added for reading assistants.
 - **User Consideration**: Identify the target users and tailor data presentation, design and functionality choices to their needs. For this, we should understand the user and perform thorough design/UX reviews. We could also conduct Beta testing with users and gather feedback.
 
@@ -111,18 +112,18 @@ npm test
 
 **Performed Tests**
 
-- Exploratory Testing: Exploratory testing has been conducted to cover most scenarios (happy paths and error cases)
-- Unit Tests - Utility Functions
-  - Note: Some tests are disabled due to failures and lack of time to fix them.
+- Exploratory Testing: Conducted to cover most scenarios (happy paths and error cases)
+- Unit Tests of Utility Functions
+  - Note: Some tests have been disabled due to lack of time to fix configurations.
 
 **Future**
 
-- Component and Hook Tests: Need to add and fix test configurations to resolve failures.
+- Component and Hook Tests: Need to add tests and fix configurations to resolve failures.
 
 ## Technologies
 
 - **React**: A JavaScript library for building user interfaces.
-- **Vite** - A build tool for modern web projects suitable for small applications.
+- **Vite**: A build tool for modern web projects suitable for small applications.
 - **Material-UI**: A popular and simple React UI framework for implementing design components.
 - **Axios**: A promise-based HTTP client for making API requests.
 - **SpaceX API** (3rd party): The data source providing detailed information about space launches.
